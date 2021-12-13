@@ -123,7 +123,7 @@ const ReservesPage = inject("store")(
           fullname: () => (
             <div className="user-info">
               <h3 className="user-info__title">{item.fullName}</h3>
-              <h4 className="user-info__subtitle">{item.network?.name}</h4>
+              <h4 className="user-info__subtitle">{item.coworkingName}</h4>
             </div>
           ),
           datetime: () => formatDate(item.reservationDate, item.reservationHours.from),
