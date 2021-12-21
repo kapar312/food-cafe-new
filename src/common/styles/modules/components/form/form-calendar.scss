@@ -1,16 +1,16 @@
 .form-field_wrapper._calendar {
-  .form-field{
-    &_field{
+  .form-field {
+    &_field {
       width: 100%;
       font-family: $primaryFontRegular;
       border: 0;
       background-color: transparent;
-      .react-datepicker{
-        &__header{
+      .react-datepicker {
+        &__header {
           background-color: transparent;
           border-bottom: 0;
         }
-        &__navigation{
+        &__navigation {
           width: 22px;
           height: 22px;
           top: 6px;
@@ -20,50 +20,50 @@
           background-position: center;
           border: 0;
           border-radius: $circleBorderRadius;
-          transition: .3s;
-          &:hover{
+          transition: 0.3s;
+          &:hover {
             background-color: $ghost;
           }
-          &--previous{
+          &--previous {
             background-image: url("../../../../images/svg/arrow-left.svg");
           }
-          &--next{
+          &--next {
             background-image: url("../../../../images/svg/arrow-right.svg");
           }
         }
-        &__day-names{
+        &__day-names {
           display: flex;
           justify-content: space-between;
           margin-bottom: 10px;
         }
-        &__day-name{
+        &__day-name {
           text-transform: uppercase;
           color: $textColorPrimaryLighten;
           font-size: $xsFontSize;
           line-height: $xsLineHeight;
           font-family: $primaryFontBold;
         }
-        &__month-container{
+        &__month-container {
           width: 100%;
           float: none;
         }
-        &__current-month{
+        &__current-month {
           margin-bottom: 30px;
           text-transform: capitalize;
           font-size: $mdFontSize;
           line-height: $mdLineHeight;
         }
-        &__month{
+        &__month {
           margin: 0;
         }
-        &__week{
+        &__week {
           display: flex;
           justify-content: space-between;
-          &:not(:last-child){
+          &:not(:last-child) {
             margin-bottom: 5px;
           }
         }
-        &__day{
+        &__day {
           display: inline-flex;
           justify-content: center;
           align-items: center;
@@ -72,21 +72,21 @@
           height: 36px;
           font-family: $primaryFontMedium;
           border-radius: $mdBorderRadius;
-          &--outside-month{
+          &--outside-month {
             color: $ghost;
           }
-          &--today{
+          &--today {
             font-family: $primaryFontBold;
             font-weight: bold;
             border: 1px solid $ghost;
           }
-          &--weekend{
+          &--weekend {
             color: $textColorPrimary;
           }
-          &--keyboard-selected{
+          &--keyboard-selected {
             color: $textColorWhite;
             background-color: $secondaryColor;
-            &:hover{
+            &:hover {
               background-color: $secondaryColorHover;
             }
           }

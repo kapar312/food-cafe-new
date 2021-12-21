@@ -13,9 +13,9 @@
     flex: 0 0 auto;
     padding-right: 20px;
     margin-right: 20px;
-    &:before{
+    &:before {
       position: absolute;
-      content: '';
+      content: "";
       right: 0;
       top: 50px;
       width: 1px;
@@ -27,44 +27,44 @@
     width: 100%;
     flex: 1 1 auto;
   }
-  &_title{
-    &__wrapper{
+  &_title {
+    &__wrapper {
       margin-bottom: 30px;
       display: flex;
       justify-content: space-between;
     }
-    &__text{
+    &__text {
       font-size: $lgFontSize;
       font-family: $primaryFontMedium;
     }
-    &__date{
+    &__date {
       font-size: $bsFontSize;
       color: $textColorPrimary;
     }
   }
-  &_form{
-    &__wrapper{
+  &_form {
+    &__wrapper {
       margin-bottom: 20px;
       padding: 20px;
       background-color: $white;
       border-radius: $bsBorderRadius;
     }
-    &__actions{
+    &__actions {
       display: flex;
       justify-content: center;
-      .btn-custom{
+      .btn-custom {
         width: 100%;
       }
     }
   }
-  &_switch{
-    &__wrapper{
+  &_switch {
+    &__wrapper {
       display: flex;
       align-items: center;
       padding: 20px;
       background-color: $white;
       border-radius: $bsBorderRadius;
-      .form-field_wrapper{
+      .form-field_wrapper {
         margin-bottom: 0;
         margin-right: 10px;
       }
