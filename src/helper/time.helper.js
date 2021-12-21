@@ -1,5 +1,9 @@
 import {getStorage} from "../services/storage.service";
 
+export const addZeroBefore = (time) => {
+  return (time < 10 ? "0" : "") + time;
+};
+
 export const convertDaeToISOFormat = (time) => {
   // convert date format from dd.mm.yyyy HH:mm:ssZ (20.09.2021 05:57:53Z)
   // to toISOString YYYY-MM-DDTHH:mm:ss.sssZ (2021-09-20T05:57:53.000Z)

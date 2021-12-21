@@ -1,16 +1,73 @@
 .reserves-page {
   &_wrapper {
+    padding: 15px;
   }
   &_inner-wrapper {
     display: flex;
+    min-height: 70vh;
   }
   &_left-side {
+    position: relative;
     width: 40%;
     max-width: 400px;
     flex: 0 0 auto;
+    padding-right: 20px;
+    margin-right: 20px;
+    &:before{
+      position: absolute;
+      content: '';
+      right: 0;
+      top: 50px;
+      width: 1px;
+      height: calc(100% - 50px);
+      background-color: $ghost;
+    }
   }
   &_right-side {
     width: 100%;
     flex: 1 1 auto;
+  }
+  &_title{
+    &__wrapper{
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__text{
+      font-size: $lgFontSize;
+      font-family: $primaryFontMedium;
+    }
+    &__date{
+      font-size: $bsFontSize;
+      color: $textColorPrimary;
+    }
+  }
+  &_form{
+    &__wrapper{
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: $white;
+      border-radius: $bsBorderRadius;
+    }
+    &__actions{
+      display: flex;
+      justify-content: center;
+      .btn-custom{
+        width: 100%;
+      }
+    }
+  }
+  &_switch{
+    &__wrapper{
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background-color: $white;
+      border-radius: $bsBorderRadius;
+      .form-field_wrapper{
+        margin-bottom: 0;
+        margin-right: 10px;
+      }
+    }
   }
 }

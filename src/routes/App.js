@@ -33,11 +33,12 @@ export const App = () => {
             <Route exact path={MAIN_PAGE} component={MainPageLayout} />
             <Route exact path={CONFIRMATION_PAGE} component={GuestsPageLayout} />
             <Route
+              exact
               path={CONFIRMATION_RESERVES_PAGE}
               component={GuestsReservesPageLayout}
             />
             <Route path={LOGIN_PAGE} component={LoginPageLayout} />
-            <Route path={RESERVES_PAGE} component={ReservesPageLayout} />
+            <Route exact path={RESERVES_PAGE} component={ReservesPageLayout} />
             <Route path="*" component={ErrorPageLayout} />
           </Switch>
         </Router>
