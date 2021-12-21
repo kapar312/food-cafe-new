@@ -20,7 +20,7 @@
     font-size: 26px;
     color: #000;
     outline: none;
-    &:focus{
+    &:focus {
       border-bottom-color: $primaryColor;
     }
     &.error {

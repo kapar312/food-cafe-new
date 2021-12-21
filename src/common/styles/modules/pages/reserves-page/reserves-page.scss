@@ -1,16 +1,15 @@
-.reserves-page{
-  &_wrapper{
-
+.reserves-page {
+  &_wrapper {
   }
-  &_inner-wrapper{
+  &_inner-wrapper {
     display: flex;
   }
-  &_left-side{
+  &_left-side {
     width: 40%;
     max-width: 400px;
     flex: 0 0 auto;
   }
-  &_right-side{
+  &_right-side {
     width: 100%;
     flex: 1 1 auto;
   }
