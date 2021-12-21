@@ -4,6 +4,7 @@ $white: #ffffff;
 $black: #000000;
 $gray: #898989;
 $light-gray: #dbdbdb;
+$ghost: #c9ccd3;
 $titan-white: #f9f9ff;
 $alabaster: #fafafa;
 $kimberly: #7374a3;
@@ -13,12 +14,12 @@ $white-lilac: #e3e4f5;
 
 // Project Colors
 $primaryColor: #4b556f;
-$primaryColorHover: #5a6685;
-$primaryColorLighten: #7d8392;
+$primaryColorHover: #3e4861;
+$primaryColorLighten: #9399a8;
 
-$secondaryColor: #f6a300;
+$secondaryColor: #fd8e3e;
 $secondaryColorHover: #f6a361;
-$secondaryColorLighten: #f6a300;
+$secondaryColorLighten: #e2ad88;
 
 $successColor: #8bc531;
 $successColorHover: #8bc581;
@@ -26,9 +27,9 @@ $successColorLighten: #96d336;
 
 $dangerColor: #ea5f60;
 $dangerColorHover: #ff7261;
-$dangerColorLighten: #f68173;
+$dangerColorLighten: #ff7261;
 
-$defaultColor: $light-gray;
+$defaultColor: $white;
 $defaultColorHover: $white-lilac;
 $defaultColorLighten: $titan-white;
 
@@ -44,6 +45,7 @@ $cardItemBackground: $white;
 $bsBorderColor: $light-gray;
 $scrollbarColor: $kimberly;
 $scrollbarTrackColor: $seashell;
+$listHeadColor: $seashell;
 
 // Text colors
 $textColorBlack: $black;
@@ -51,13 +53,16 @@ $textColorWhite: $white;
 $textColorGrey: $gray;
 $textColorPrimary: $primaryColor;
 $textColorPrimaryHover: $primaryColorHover;
+$textColorPrimaryLighten: $primaryColorLighten;
 $textColorSecondary: $secondaryColor;
 $textColorLightSecondary: $secondaryColorHover;
+$textColorDanger: $dangerColor;
+$textColorLightDanger: $dangerColorHover;
 
 // Border-radius
 $smBorderRadius: 4px;
 $mdBorderRadius: 8px;
-$bsBorderRadius: 16px;
+$bsBorderRadius: 12px;
 $circleBorderRadius: 50%;
 $roundBorderRadius: 55px;
 
@@ -76,8 +81,6 @@ $primaryFontBold: "Roboto-Bold";
 $primaryFontMedium: "Roboto-Medium";
 $primaryFontRegular: "Roboto-Regular";
 $primaryFontLight: "Roboto-Light";
-
-$main-font: "Roboto";
 
 // Font-size
 $xsFontSize: 0.75rem;

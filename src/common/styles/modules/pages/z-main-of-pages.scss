@@ -1,6 +1,8 @@
 @import "error-page/error-page";
+@import "confirmation-reserves-page/confirmation-reserves-page";
+@import "confirmation-page/confirmation-page";
+@import "login-page/login-page";
 @import "reserves-page/reserves-page";
-@import "started-page/started-page";
 
-@import "started-page/z-media-started-page";
-@import "reserves-page/z-media-reserves-page";
+@import "confirmation-page/z-media-confirmation-page";
+@import "confirmation-reserves-page/z-media-confirmation-reserves-page";

@@ -71,7 +71,7 @@
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-autosuggest": "^10.1.0",
-    "react-datepicker": "^3.0.0",
+    "react-datepicker": "^3.8.0",
     "react-dev-utils": "^10.2.1",
     "react-dnd": "^11.1.0",
     "react-dnd-html5-backend": "^11.1.0",
@@ -84,6 +84,7 @@
     "react-responsive-modal": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1",
+    "react-switch": "^6.0.0",
     "react-text-mask": "^5.4.3",
     "react-toastify": "^7.0.4",
     "resolve": "1.15.0",
@@ -112,7 +113,7 @@
     "printWidth": 90,
     "bracketSpacing": false,
     "trailingComma": "es5",
-	"endOfLine": "auto"
+    "endOfLine": "auto"
   },
   "husky": {
     "hooks": {

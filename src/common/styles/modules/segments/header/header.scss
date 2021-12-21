@@ -1,0 +1,39 @@
+.header {
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 8px 25px;
+    background-color: $headerBgColor;
+    box-shadow: $bsBoxShadow;
+    z-index: $zIndexHeader;
+  }
+  &_inner-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  &_title {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    font-size: $mdFontSize;
+    sup {
+      font-size: $smFontSize;
+      color: $textColorSecondary;
+    }
+    * > {
+      margin-right: 5px;
+    }
+  }
+  &_actions {
+    &__wrapper {
+      margin-left: auto;
+    }
+  }
+}

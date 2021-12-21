@@ -14,13 +14,15 @@
     margin: 0 5px;
     width: 44px !important;
     border: none;
-    border-bottom: 1px solid #c9ccd3;
+    border-bottom: 2px solid #c9ccd3;
     height: 40px;
     text-align: center;
     font-size: 26px;
     color: #000;
     outline: none;
-
+    &:focus{
+      border-bottom-color: $primaryColor;
+    }
     &.error {
       border-color: $dangerColor;
     }

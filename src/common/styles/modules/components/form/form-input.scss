@@ -14,4 +14,9 @@
       border-color: $primaryColorLighten;
     }
   }
+  &._label {
+    .form-field_inner-wrapper {
+      padding-top: 12px;
+    }
+  }
 }

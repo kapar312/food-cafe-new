@@ -1,15 +1,11 @@
 .layout {
   &_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("../../../../images/background.png") center no-repeat;
-    background-size: cover;
+    background-color: $mainBackgroundColor;
     min-height: 100vh;
     position: relative;
   }
   &_inner-wrapper {
-    width: 100%;
+    padding: 15px;
     transition: 0.2s;
   }
 }
