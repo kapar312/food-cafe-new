@@ -90,15 +90,15 @@
             &:hover {
               background-color: $secondaryColorHover;
             }
-            .react-datepicker__day--inner-sup{
+            .react-datepicker__day--inner-sup {
               color: $textColorWhite;
             }
           }
-          &--inner{
-            &._disabled{
+          &--inner {
+            &._disabled {
               color: red !important;
             }
-            &-sup{
+            &-sup {
               position: absolute;
               left: 50%;
               transform: translateX(-50%);
