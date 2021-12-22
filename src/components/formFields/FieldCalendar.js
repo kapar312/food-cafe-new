@@ -14,15 +14,51 @@ const FieldCalendar = ({
   fieldClassName,
   onChange,
   defaultValue,
+  customDatesArray,
 }) => {
   const onFiledChange = (date) => {
-    const selectedDate = addZeroBefore(new Date(date).getDate());
-    const selectedMonth = addZeroBefore(new Date(date).getMonth());
+    const selectedDay = addZeroBefore(new Date(date).getDate());
+    const selectedMonth = addZeroBefore(new Date(date).getMonth() + 1);
     const selectedYear = new Date(date).getFullYear();
-    const fullDate = `${selectedDate}.${selectedMonth}.${selectedYear}`;
+    const fullDate = `${selectedDay}.${selectedMonth}.${selectedYear}`;
     if (isFunction(onChange)) {
       onChange(name, fullDate);
     }
+  };
+
+  const createDate = (availableIndex, dayIndex, date) => {
+    if (Number.isInteger(availableIndex)) {
+      return <div className="react-datepicker__day--inner _disabled">{date}</div>;
+    } else if (Number.isInteger(dayIndex) && !!customDatesArray[dayIndex].reservesCount) {
+      return (
+        <div className="react-datepicker__day--inner">
+          {date}{" "}
+          <span className="react-datepicker__day--inner-sup">
+            {customDatesArray[dayIndex].reservesCount}
+          </span>
+        </div>
+      );
+    } else return <div className="react-datepicker__day--inner">{date}</div>;
+  };
+
+  const renderDays = (day, date) => {
+    const customDate = new Date(date).getDate();
+    const selectedDay = addZeroBefore(new Date(date).getDate());
+    const selectedMonth = addZeroBefore(new Date(date).getMonth() + 1);
+    const selectedYear = new Date(date).getFullYear();
+    const fullDate = `${selectedDay}.${selectedMonth}.${selectedYear}`;
+    let arrayDayIndex = null;
+    let arrayIsAvailableIndex = null;
+    for (let i = 0; i < customDatesArray.length; i++) {
+      if (customDatesArray[i].date === fullDate) {
+        arrayDayIndex = i;
+        if (!customDatesArray[i].isAvailable) {
+          arrayIsAvailableIndex = i;
+          break;
+        }
+      }
+    }
+    return createDate(arrayIsAvailableIndex, arrayDayIndex, customDate);
   };
 
   return (
@@ -35,6 +71,7 @@ const FieldCalendar = ({
           onChange={(date) => onFiledChange(date)}
           calendarClassName={cn("form-field_field", fieldClassName)}
           showNavigation={false}
+          renderDayContents={!!customDatesArray.length && renderDays}
         />
         {errorName && (
           <ErrorMessage name={errorName}>

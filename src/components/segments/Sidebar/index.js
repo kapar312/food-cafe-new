@@ -34,7 +34,7 @@ const Sidebar = ({setSidebarWidth}) => {
         </div>
         <div className="sidebar_list__wrapper">
           <NavLink to={CONFIRMATION_PAGE} className="sidebar_list__item">
-            <IconUser color={COLOR_PRIMARY} /> Встретить гостя
+            <IconUser color={COLOR_PRIMARY} /> Подтвердить бронирование
           </NavLink>
           <NavLink to={RESERVES_PAGE} className="sidebar_list__item">
             <IconCheck color={COLOR_PRIMARY} /> Резервы

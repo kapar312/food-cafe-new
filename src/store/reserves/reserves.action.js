@@ -31,4 +31,8 @@ export class ReservesAction {
   setLastDigitsOfNumber(data) {
     this.lastDigitsOfNumber = data;
   }
+
+  setActiveReservesTab(value) {
+    this.activeReservesTab = value;
+  }
 }

@@ -35,10 +35,12 @@
     }
     &__text {
       font-size: $lgFontSize;
+      line-height: $mdLineHeight;
       font-family: $primaryFontMedium;
     }
     &__date {
       font-size: $bsFontSize;
+      line-height: $mdLineHeight;
       color: $textColorPrimary;
     }
   }
@@ -54,6 +56,27 @@
       justify-content: center;
       .btn-custom {
         width: 100%;
+        font-size: 14px;
+      }
+    }
+  }
+  &_tabs{
+    &__wrapper{
+      display: flex;
+    }
+    &__item.btn-custom{
+      padding: 10px 14px;
+      border-color: $ghost;
+      font-size: $bsFontSize;
+      &:not(:first-child){
+        margin-left: 15px;
+      }
+      &:hover{
+        background-color: $white;
+      }
+      &._active{
+        border-color: $secondaryColor;
+        box-shadow: $bsBoxShadowHover;
       }
     }
   }

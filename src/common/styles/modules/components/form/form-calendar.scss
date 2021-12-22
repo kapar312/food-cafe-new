@@ -11,8 +11,8 @@
           border-bottom: 0;
         }
         &__navigation {
-          width: 22px;
-          height: 22px;
+          width: 26px;
+          height: 26px;
           top: 6px;
           background-repeat: no-repeat;
           background-size: 8px;
@@ -64,6 +64,7 @@
           }
         }
         &__day {
+          position: relative;
           display: inline-flex;
           justify-content: center;
           align-items: center;
@@ -88,6 +89,23 @@
             background-color: $secondaryColor;
             &:hover {
               background-color: $secondaryColorHover;
+            }
+            .react-datepicker__day--inner-sup{
+              color: $textColorWhite;
+            }
+          }
+          &--inner{
+            &._disabled{
+              color: red !important;
+            }
+            &-sup{
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              bottom: 2px;
+              font-size: 8px;
+              line-height: 8px;
+              color: $textColorSecondary;
             }
           }
         }
