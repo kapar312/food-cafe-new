@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import cn from "classnames";
 import {ErrorMessage} from "formik";
 import {isFunction} from "lodash";
@@ -11,12 +11,11 @@ const FieldSwitch = ({
   wrapperClassName,
   fieldClassName,
   onChange,
-  defaultValue,
+  value,
+  isDisabled,
 }) => {
-  const [isActive, setIsActive] = useState(defaultValue || false);
   const onSwitchChange = (nextChecked) => {
     if (isFunction(onChange)) {
-      setIsActive(nextChecked);
       onChange(name, nextChecked);
     }
   };
@@ -27,8 +26,8 @@ const FieldSwitch = ({
       <div className="form-field_inner-wrapper">
         <Switch
           onChange={onSwitchChange}
-          checked={isActive}
-          className="form-field_field"
+          checked={value}
+          className={cn("form-field_field", fieldClassName)}
           uncheckedIcon={false}
           checkedIcon={false}
           offColor="#c9ccd3"
@@ -36,6 +35,7 @@ const FieldSwitch = ({
           handleDiameter={18}
           height={24}
           width={38}
+          disabled={isDisabled}
         />
         {errorName && (
           <ErrorMessage name={errorName}>

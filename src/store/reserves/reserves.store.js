@@ -1,6 +1,5 @@
 import {decorate, observable} from "mobx";
 import {ReservesAction} from "./reserves.action";
-import {datesMockups} from "../../mockup/datesMockup";
 
 class ReservesStore extends ReservesAction {
   reservesList = {};
@@ -8,7 +7,7 @@ class ReservesStore extends ReservesAction {
   lastDigitsOfNumber = "";
   activeReservesTab = null;
   selectedCalendarDate = null;
-  datesList = datesMockups;
+  datesList = [];
 }
 
 // eslint-disable-next-line no-class-assign

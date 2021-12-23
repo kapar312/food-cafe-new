@@ -87,7 +87,7 @@ const FieldCalendar = inject("store")(
               onChange={(date) => onFiledChange(date)}
               calendarClassName={cn("form-field_field", fieldClassName)}
               showNavigation={false}
-              renderDayContents={!!customDatesArray.length && renderDays}
+              renderDayContents={!!customDatesArray?.length && renderDays}
             />
             {errorName && (
               <ErrorMessage name={errorName}>

@@ -1,47 +1,62 @@
 export const datesMockups = [
   {
-    date: "22.12.2021",
+    date: "20.12.2021",
     isAvailable: true,
     reservesCount: 11,
   },
   {
-    date: "23.12.2021",
+    date: "21.12.2021",
     isAvailable: false,
     reservesCount: 0,
   },
   {
-    date: "24.12.2021",
+    date: "22.12.2021",
     isAvailable: true,
     reservesCount: 0,
   },
   {
-    date: "25.12.2021",
+    date: "23.12.2021",
     isAvailable: true,
     reservesCount: 9,
   },
   {
-    date: "26.12.2021",
+    date: "24.12.2021",
     isAvailable: false,
+    reservesCount: 11,
+  },
+  {
+    date: "25.12.2021",
+    isAvailable: false,
+    reservesCount: 11,
+  },
+  {
+    date: "26.12.2021",
+    isAvailable: true,
     reservesCount: 11,
   },
   {
     date: "27.12.2021",
-    isAvailable: false,
-    reservesCount: 11,
+    isAvailable: true,
+    reservesCount: 0,
   },
   {
     date: "28.12.2021",
-    isAvailable: false,
+    isAvailable: true,
+    reservesCount: 0,
+  },
+  {
+    date: "29.12.2021",
+    isAvailable: true,
     reservesCount: 11,
   },
   {
-    date: "18.12.2021",
-    isAvailable: true,
+    date: "30.12.2021",
+    isAvailable: false,
     reservesCount: 11,
   },
   {
     date: "31.12.2021",
-    isAvailable: true,
+    isAvailable: false,
     reservesCount: 11,
   },
 ];
