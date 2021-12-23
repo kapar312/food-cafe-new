@@ -91,9 +91,9 @@
               background-color: $secondaryColorHover;
             }
             .react-datepicker__day {
-              &--inner{
-                &._disabled{
-                  color: $textColorWhite
+              &--inner {
+                &._disabled {
+                  color: $textColorWhite;
                 }
                 &-sup {
                   color: $textColorWhite;
@@ -105,7 +105,7 @@
             }
           }
           &--inner {
-            &._disabled{
+            &._disabled {
               color: $textColorGrey;
             }
             &-sup {
