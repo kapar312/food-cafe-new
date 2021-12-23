@@ -41,20 +41,20 @@
     padding: 60px 40px;
     box-shadow: 0 2px 17px rgba(120, 120, 120, 0.1);
     border: 1px solid $ghost;
-    &._size-small{
+    &._size-small {
       max-width: 320px;
     }
-    &._size-base{
+    &._size-base {
       max-width: 440px;
     }
-    &._size-medium{
+    &._size-medium {
       max-width: 580px;
     }
-    &._size-large{
+    &._size-large {
       max-width: 720px;
     }
   }
-  &_close{
+  &_close {
     position: absolute;
     display: inline-flex;
     justify-content: center;
@@ -67,49 +67,49 @@
     border: 2px solid $white;
     border-radius: $circleBorderRadius;
     cursor: pointer;
-    transition: .3s;
-    &:hover{
+    transition: 0.3s;
+    &:hover {
       background-color: $ghost;
     }
   }
-  &_body{
-    .icon_wrapper{
+  &_body {
+    .icon_wrapper {
       font-size: 72px;
       text-align: center;
     }
-    h3{
+    h3 {
       margin: 20px 0;
       text-align: center;
       font-size: 22px;
       font-weight: bold;
     }
-    p{
+    p {
       margin-bottom: 10px;
       font-size: $bsFontSize;
       color: $textColorPrimary;
       line-height: $bsLineHeight;
       text-align: center;
     }
-    .contacts_wrapper{
+    .contacts_wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 30px;
-      a{
+      a {
         color: $textColorBlack;
-        &:hover{
+        &:hover {
           color: $textColorSecondary;
         }
-        &.phone{
+        &.phone {
           font-size: $lgFontSize;
           line-height: $mdLineHeight;
         }
-        &.mail{
+        &.mail {
           font-size: $mdFontSize;
           line-height: $mdLineHeight;
         }
       }
-      span{
+      span {
         margin: 15px 0;
         width: 30px;
         height: 1px;

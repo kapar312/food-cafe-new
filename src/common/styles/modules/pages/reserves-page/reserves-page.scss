@@ -44,8 +44,8 @@
       color: $textColorPrimary;
     }
   }
-  &_calendar-info{
-    &__wrapper{
+  &_calendar-info {
+    &__wrapper {
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
@@ -53,17 +53,17 @@
       background-color: $seashell;
       border-radius: $mdBorderRadius;
     }
-    &__item{
+    &__item {
       color: $textColorPrimaryLighten;
       font-size: $xsFontSize;
       line-height: $xsLineHeight;
       display: inline-flex;
       align-items: center;
-      > *{
+      > * {
         margin-right: 5px;
         flex: 0 0 auto;
       }
-      i{
+      i {
         display: inline-block;
         width: 7px;
         height: 7px;

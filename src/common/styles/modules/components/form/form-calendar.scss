@@ -90,10 +90,10 @@
             &:hover {
               background-color: $secondaryColorHover;
             }
-            .react-datepicker__day{
+            .react-datepicker__day {
               &--inner-sup {
                 color: $textColorWhite;
-                i{
+                i {
                   background-color: $white;
                 }
               }
@@ -108,7 +108,7 @@
               font-size: 8px;
               line-height: 8px;
               color: $textColorSecondary;
-              i{
+              i {
                 display: inline-block;
                 width: 5px;
                 height: 5px;
