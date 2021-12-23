@@ -1,0 +1,124 @@
+.sidebar {
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 190px;
+    background-color: $headerBgColor;
+    box-shadow: $bsBoxShadow;
+    z-index: $zIndexSidebar;
+  }
+
+  &_inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  &_logo {
+    &__item {
+      display: flex;
+      justify-content: center;
+      min-height: 60px;
+      padding: 8px 0;
+      background-color: $primaryColor;
+      font-size: $lgFontSize;
+      line-height: $lgLineHeight;
+      color: $textColorWhite;
+      font-family: $primaryFontBold;
+      &:hover {
+        background-color: $primaryColorHover;
+      }
+      img,
+      svg {
+        width: 90%;
+        max-height: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  &_list {
+    &__wrapper {
+      padding: 30px 10px;
+    }
+    &__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 15px 10px;
+      background-color: $white;
+      border-radius: $mdBorderRadius;
+      border: 1px solid transparent;
+      font-size: $smFontSize;
+      line-height: $bsLineHeight;
+      color: $textColorPrimaryLighten;
+      font-family: $primaryFontMedium;
+      &:hover:not(.active) {
+        color: $textColorPrimaryHover;
+        background-color: $titan-white;
+      }
+      &.active {
+        border-color: $ghost;
+        color: $textColorPrimary;
+        background-color: $titan-white;
+      }
+      &:last-child {
+        margin-bottom: 0;
+        &:before {
+          display: none;
+        }
+      }
+      svg {
+        margin-right: 7px;
+      }
+    }
+    &_link {
+      svg {
+        max-width: 14px;
+        max-height: 100%;
+        margin-right: 9px;
+        flex: 0 0 auto;
+      }
+    }
+  }
+
+  &_exit {
+    &__wrapper {
+      position: relative;
+      margin-top: auto;
+      padding: 0 10px;
+      &:before {
+        position: absolute;
+        content: "";
+        top: -10px;
+        width: calc(100% - 20px);
+        height: 1px;
+        background-color: $white-lilac;
+      }
+    }
+    &__item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 12px;
+      background-color: $white;
+      border-radius: $smBorderRadius;
+      border: 2px solid transparent;
+      font-size: $smFontSize;
+      line-height: $bsLineHeight;
+      color: $textColorPrimary;
+      font-family: $primaryFontMedium;
+      &:hover {
+        border-color: $bsBorderColor;
+        color: $textColorPrimaryHover;
+        background-color: $white-lilac;
+      }
+    }
+  }
+}

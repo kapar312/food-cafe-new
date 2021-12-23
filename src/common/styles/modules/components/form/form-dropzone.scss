@@ -10,6 +10,8 @@
       border: $borderPrimary;
       transition: 0.2s;
       cursor: pointer;
+      max-height: 500px;
+      overflow-y: auto;
       &:hover {
         border-color: $primaryColorLighten;
         background: rgba($defaultColorHover, 0.2);
