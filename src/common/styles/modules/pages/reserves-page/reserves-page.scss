@@ -27,13 +27,13 @@
     width: 100%;
     flex: 1 1 auto;
   }
-  &_title {
+  &_head {
     &__wrapper {
       margin-bottom: 30px;
       display: flex;
       justify-content: space-between;
     }
-    &__text {
+    &__title {
       font-size: $lgFontSize;
       line-height: $mdLineHeight;
       font-family: $primaryFontMedium;
@@ -42,6 +42,34 @@
       font-size: $bsFontSize;
       line-height: $mdLineHeight;
       color: $textColorPrimary;
+    }
+  }
+  &_calendar-info{
+    &__wrapper{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 15px 10px;
+      background-color: $seashell;
+      border-radius: $mdBorderRadius;
+    }
+    &__item{
+      color: $textColorPrimaryLighten;
+      font-size: $xsFontSize;
+      line-height: $xsLineHeight;
+      display: inline-flex;
+      align-items: center;
+      > *{
+        margin-right: 5px;
+        flex: 0 0 auto;
+      }
+      i{
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: $circleBorderRadius;
+        background-color: $secondaryColor;
+      }
     }
   }
   &_form {

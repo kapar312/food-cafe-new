@@ -1,4 +1,4 @@
-export const datedMockups = [
+export const datesMockups = [
   {
     date: "22.12.2021",
     isAvailable: true,
