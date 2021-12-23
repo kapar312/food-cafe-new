@@ -10,15 +10,15 @@ import ModalError from "../../modals/ModalError";
 import ModalSuccess from "../../modals/ModalSuccess";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import {IconCalendar, IconCheck, IconNotice, IconUser} from "../../Icons";
+import IconArrow from "../../Icons/common/IconArrow";
+import TableSort from "../../common/TableSort";
 
-import TableSort from "./components/TableSort";
 import Alert from "./components/Alert";
 import Skeleton from "./components/Skeleton";
 import Placeholder from "./components/Placeholder";
 
 import {formatLastDigits, formatPrice} from "./helpers";
 import {CONFIRMATION_PAGE} from "../../../consts/routes.const";
-import IconArrow from "../../Icons/common/IconArrow";
 
 const ConfirmationReservesPage = inject("store")(
   observer(({store: {reserves}}) => {

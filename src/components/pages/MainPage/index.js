@@ -9,7 +9,7 @@ const MainPage = inject("store")(
       <Layout headerTitle="Главная страница">
         <div className="main-page_wrapper">
           <div className="main-page_inner-wrapper">
-            <h1>Главная страница</h1>
+            <h1>Добро пожаловать в FoodWorking</h1>
           </div>
         </div>
       </Layout>

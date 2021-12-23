@@ -257,8 +257,9 @@
     }
   }
   &__subtitle {
-    font-size: 14px;
-    color: #4b556f;
+    font-size: $smFontSize;
+    line-height: $smLineHeight;
+    color: $textColorPrimary;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;

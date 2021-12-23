@@ -1,11 +1,11 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
-import cn from "classnames";
 import {useHistory} from "react-router-dom";
 
-import {MAIN_PAGE} from "../../../consts/routes.const";
 import ModalLayout from "../ModalLayout";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
+
+import {CONFIRMATION_PAGE} from "../../../consts/routes.const";
 
 const ModalError = inject("store")(
   observer(({isVisible, closeModal}) => {
@@ -13,7 +13,7 @@ const ModalError = inject("store")(
     const classPrefix = "modal-error";
 
     const onMainBtnClick = () => {
-      history.push(MAIN_PAGE);
+      history.push(CONFIRMATION_PAGE);
     };
 
     const refreshPage = () => {
@@ -23,29 +23,34 @@ const ModalError = inject("store")(
     };
 
     return (
-      <ModalLayout isVisible={isVisible} wrapperClassName={`${classPrefix}_wrapper`}>
-        <div className={cn("modal_content", `${classPrefix}_content`)}>
-          <div className={cn("modal_icon", `${classPrefix}_icon`)}>{"🤷"}</div>
-          <h3 className={cn("modal_title", `${classPrefix}_title`)}>
-            Что-то пошло не так!
-          </h3>
-          <p className={cn("modal_text", `${classPrefix}_text`)}>
-            Попробуйте перезагрузить страницу и повторить снова.
-          </p>
-          <p className={cn("modal_text", `${classPrefix}_text`)}>
-            Если не получится подтвердить бронь после перезагрузки страницы, то обратитесь
-            в службу поддержки +7 (495) 120-02-31.
-          </p>
-          <div className={cn("modal_actions", `${classPrefix}_actions`)}>
+      <ModalLayout
+        isVisible={isVisible}
+        closeModal={closeModal}
+        classPrefix={classPrefix}
+        wrapperClassName={`${classPrefix}_wrapper`}
+        bodyContent={
+          <>
+            <div className="icon_wrapper">{"🤷"}</div>
+            <h3>Что-то пошло не так!</h3>
+            <p>Попробуйте перезагрузить страницу и повторить снова.</p>
+            <p>
+              Если не получится подтвердить бронь после перезагрузки страницы, то
+              обратитесь в службу поддержки{" "}
+              <a href="tel:+74961200231">+7 (495) 120-02-31</a>
+            </p>
+          </>
+        }
+        footerContent={
+          <>
             <ButtonPrimary onClick={refreshPage} type="button" buttonColor="primary">
               Перезагрузить страницу
             </ButtonPrimary>
             <ButtonPrimary onClick={onMainBtnClick} type="button" buttonColor="default">
               На главную
             </ButtonPrimary>
-          </div>
-        </div>
-      </ModalLayout>
+          </>
+        }
+      />
     );
   })
 );

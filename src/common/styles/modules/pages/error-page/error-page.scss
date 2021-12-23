@@ -1,42 +1,39 @@
 .error-page {
   &_wrapper {
-    padding: 50px 0;
-    .container {
-      justify-content: center;
-    }
+    display: flex;
+    min-height: 100%;
+  }
+  &_inner-wrapper {
+    display: flex;
+    width: 100%;
+  }
+  &_image__wrapper {
+    width: 50%;
+    background-image: url("../../../../images/jpg/error-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   &_content {
     &__wrapper {
-      background-color: $white;
-      padding: 30px;
-      max-width: 440px;
-      box-shadow: 0 2px 17px rgba(120, 120, 120, 0.1);
-      border-radius: $bsBorderRadius;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     &__title {
-      margin-bottom: 20px;
-      font-size: 5.25rem;
-      line-height: 5.25rem;
+      margin: 20px 0;
+      font-size: $xlFontSize + $xlFontSize;
+      line-height: $xlLineHeight + $xlLineHeight;
       color: $primaryColor;
-      font-weight: bold;
-      text-align: center;
     }
     &__sub-title {
-      margin-bottom: 20px;
-      font-size: $xlFontSize;
-      line-height: $xlLineHeight;
-      text-align: center;
+      margin-bottom: 5px;
+      font-size: $xlFontSize + $xlFontSize;
+      line-height: $xlLineHeight + $xlLineHeight;
     }
     &__text {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    &__actions {
-      display: flex;
-      justify-content: center;
-      .btn-custom {
-        padding: 15px 70px;
-      }
+      margin-bottom: 30px;
     }
   }
 }

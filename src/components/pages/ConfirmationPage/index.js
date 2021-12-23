@@ -50,7 +50,7 @@ const ConfirmationPage = inject("store")(
     };
 
     return (
-      <Layout headerTitle="Встретить гостя" className="confirmation-page_layout">
+      <Layout headerTitle="Подтвердить бронирование" className="confirmation-page_layout">
         <div className="confirmation-page_wrapper">
           <Formik
             initialValues={initialValues}

@@ -8,6 +8,7 @@ import IconNotice from "./common/IconNotice";
 import IconCheck from "./common/IconCheck";
 import IconEye from "./common/IconEye";
 import IconArrow from "./common/IconArrow";
+import IconLock from "./common/IconLock";
 
 // Logos
 import IconLogoBlack from "./logos/IconLogoBlack";
@@ -24,4 +25,5 @@ export {
   IconEye,
   IconLogoBlack,
   IconArrow,
+  IconLock,
 };

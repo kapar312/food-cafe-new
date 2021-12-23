@@ -15,6 +15,7 @@ const ButtonPrimary = ({
   buttonColor,
   buttonSize,
   isShadow,
+  value,
 }) => {
   if (!isVisible) return null;
 
@@ -23,6 +24,7 @@ const ButtonPrimary = ({
       disabled={isDisabled}
       onSubmit={onSubmit}
       onClick={onClick}
+      value={value}
       type={type || "button"}
       className={cn(
         "btn-custom btn-custom-primary",

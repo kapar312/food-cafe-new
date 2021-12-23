@@ -1,6 +1,6 @@
 .modal {
   &_wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -33,35 +33,94 @@
     padding: 15vh 0;
   }
   &_content {
+    position: relative;
     margin: 0 auto;
     width: 90%;
-    max-width: 440px;
     border-radius: $bsBorderRadius;
     background-color: $white;
     padding: 60px 40px;
     box-shadow: 0 2px 17px rgba(120, 120, 120, 0.1);
-    border: 1px solid #c9ccd3;
+    border: 1px solid $ghost;
+    &._size-small {
+      max-width: 320px;
+    }
+    &._size-base {
+      max-width: 440px;
+    }
+    &._size-medium {
+      max-width: 580px;
+    }
+    &._size-large {
+      max-width: 720px;
+    }
   }
-  &_icon {
-    font-size: 72px;
-    text-align: center;
+  &_close {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(100%);
+    bottom: calc(100%);
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 2px solid $white;
+    border-radius: $circleBorderRadius;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: $ghost;
+    }
   }
-  &_title {
-    margin: 20px 0;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
+  &_body {
+    .icon_wrapper {
+      font-size: 72px;
+      text-align: center;
+    }
+    h3 {
+      margin: 20px 0;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    p {
+      margin-bottom: 10px;
+      font-size: $bsFontSize;
+      color: $textColorPrimary;
+      line-height: $bsLineHeight;
+      text-align: center;
+    }
+    .contacts_wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      a {
+        color: $textColorBlack;
+        &:hover {
+          color: $textColorSecondary;
+        }
+        &.phone {
+          font-size: $lgFontSize;
+          line-height: $mdLineHeight;
+        }
+        &.mail {
+          font-size: $mdFontSize;
+          line-height: $mdLineHeight;
+        }
+      }
+      span {
+        margin: 15px 0;
+        width: 30px;
+        height: 1px;
+        background-color: $primaryColor;
+      }
+    }
   }
-  &_text {
-    text-align: center;
-    font-size: $bsFontSize;
-    margin-bottom: 10px;
-    line-height: 18px;
-  }
-  &_actions {
+  &_footer {
     margin-top: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     .btn-custom {
       margin: 0 10px;
       &.primary {
