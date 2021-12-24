@@ -9,6 +9,8 @@ import IconCheck from "./common/IconCheck";
 import IconEye from "./common/IconEye";
 import IconArrow from "./common/IconArrow";
 import IconLock from "./common/IconLock";
+import IconExclamationPoint from "./common/IconExclamationPoint";
+import IconExit from "./common/IconExit";
 
 // Logos
 import IconLogoBlack from "./logos/IconLogoBlack";
@@ -26,4 +28,6 @@ export {
   IconLogoBlack,
   IconArrow,
   IconLock,
+  IconExclamationPoint,
+  IconExit,
 };

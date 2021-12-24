@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import {Formik, Form} from "formik";
 import {toast} from "react-toastify";
 
-import SearchReservesInput from "./components/SearchReservesInput/SearchReservesInput";
+import SearchReservesInput from "./components/SearchReservesInput";
 import Layout from "../../segments/Layout";
 
 import {CONFIRMATION_RESERVES_PAGE} from "../../../consts/routes.const";

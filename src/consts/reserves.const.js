@@ -1,17 +1,23 @@
+export const EReservesTabsNames = {
+  future: "Future",
+  confirmed: "Confirmed",
+  history: "History",
+};
+
 export const reservesTabs = [
   {
     id: 1,
     label: "Будущие",
-    value: "Future",
+    value: EReservesTabsNames.future,
   },
   {
     id: 2,
     label: "Подтвержденные",
-    value: "Confirmed",
+    value: EReservesTabsNames.confirmed,
   },
   {
     id: 3,
     label: "История",
-    value: "Story",
+    value: EReservesTabsNames.history,
   },
 ];

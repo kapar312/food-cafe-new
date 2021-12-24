@@ -111,15 +111,18 @@
       padding: 12px;
       background-color: $white;
       border-radius: $smBorderRadius;
-      border: 2px solid transparent;
+      border: 1px solid transparent;
       font-size: $smFontSize;
       line-height: $bsLineHeight;
-      color: $textColorPrimary;
+      color: $primaryColorLighten;
       font-family: $primaryFontMedium;
       &:hover {
         border-color: $bsBorderColor;
         color: $textColorPrimaryHover;
         background-color: $white-lilac;
+      }
+      > * {
+        margin-right: 10px;
       }
     }
   }

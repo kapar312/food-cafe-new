@@ -18,8 +18,8 @@ import {
 } from "../consts/routes.const";
 
 import MainPageLayout from "../pages/MainPageLayout";
-import GuestsPageLayout from "../pages/ConfirmationPageLayout";
-import GuestsReservesPageLayout from "../pages/GuestsReservesPageLayout";
+import ConfirmationReservesPageLayout from "../pages/ConfirmationPageLayout";
+import GuestsReservesPageLayout from "../pages/ConfirmationReservesPageLayout";
 import LoginPageLayout from "../pages/LoginPageLayout";
 import ErrorPageLayout from "../pages/ErrorPageLayout";
 import ReservesPageLayout from "../pages/ReservesPageLayout";
@@ -31,7 +31,11 @@ export const App = () => {
         <Router>
           <Switch>
             <Route exact path={MAIN_PAGE} component={MainPageLayout} />
-            <Route exact path={CONFIRMATION_PAGE} component={GuestsPageLayout} />
+            <Route
+              exact
+              path={CONFIRMATION_PAGE}
+              component={ConfirmationReservesPageLayout}
+            />
             <Route
               exact
               path={CONFIRMATION_RESERVES_PAGE}

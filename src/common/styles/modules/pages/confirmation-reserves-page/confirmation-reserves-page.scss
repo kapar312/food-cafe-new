@@ -8,8 +8,6 @@
   }
   &_inner-wrapper {
     position: relative;
-    background: #fafafa;
-    box-shadow: 0 2px 17px rgba(120, 120, 120, 0.1);
     border-radius: $bsBorderRadius;
     width: 100%;
     display: flex;
@@ -90,7 +88,7 @@
         box-shadow: 0 1px 1px rgba(120, 120, 120, 0.1);
       }
       &._item-col {
-        color: #9399a8;
+        color: $primaryColorLighten;
         font-size: $xsFontSize;
         line-height: $xsLineHeight;
         transition: 0.2s;
@@ -201,11 +199,11 @@
     .circle-icon {
       width: 22px;
       height: 22px;
-      border-radius: 50%;
+      border-radius: $circleBorderRadius;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      flex: 0 0 auto;
       margin-right: 13px;
       background: #ccc;
       img {

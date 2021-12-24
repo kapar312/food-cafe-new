@@ -13,12 +13,12 @@ import {IconCalendar, IconCheck, IconNotice, IconUser} from "../../Icons";
 import IconArrow from "../../Icons/common/IconArrow";
 import TableSort from "../../common/TableSort";
 
-import Alert from "./components/Alert";
 import Skeleton from "./components/Skeleton";
-import Placeholder from "./components/Placeholder";
+import ConfirmationPlaceholder from "./components/ConfirmationPlaceholder";
 
 import {formatLastDigits, formatPrice} from "./helpers";
 import {CONFIRMATION_PAGE} from "../../../consts/routes.const";
+import AlertPlaceholder from "../../common/AlertPlaceholder";
 
 const ConfirmationReservesPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -255,7 +255,10 @@ const ConfirmationReservesPage = inject("store")(
 
       if (reserves.reservesList?.length <= 0) {
         return (
-          <Placeholder error={false} lastDigitsOfNumber={reserves.lastDigitsOfNumber} />
+          <ConfirmationPlaceholder
+            error={false}
+            lastDigitsOfNumber={reserves.lastDigitsOfNumber}
+          />
         );
       }
 
@@ -264,7 +267,7 @@ const ConfirmationReservesPage = inject("store")(
       }
 
       return (
-        <Placeholder
+        <ConfirmationPlaceholder
           error={false}
           errorText={errorText}
           lastDigitsOfNumber={reserves.lastDigitsOfNumber}
@@ -294,7 +297,7 @@ const ConfirmationReservesPage = inject("store")(
           <div className="confirmation-reserves_wrapper">
             <div className="confirmation-reserves_inner-wrapper">
               <div className="confirmation-reserves_body">
-                <Alert text="Уточните фамилию гостя перед подтверждением бронирования" />
+                <AlertPlaceholder text="Уточните фамилию гостя перед подтверждением бронирования" />
                 {content}
               </div>
             </div>

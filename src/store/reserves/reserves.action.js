@@ -40,12 +40,12 @@ export class ReservesAction {
 
   getReservesDataByDate() {
     const params = {
-      dateFrom: "11.12.2011",
-      dateTo: "30.12.2011",
+      dateFrom: "25.12.2021",
+      dateTo: "30.12.2021",
     };
     this.setReservesList(reservesMockup);
     return axiosInstance
-      .get("hostess/reserve/by-date-range", {params})
+      .get("/reserve/by-date-range", {params})
       .then(({data}) => {
         // this.setReservesList(data);
       })
@@ -64,5 +64,9 @@ export class ReservesAction {
 
   setDatesList(data) {
     this.datesList = data;
+  }
+
+  setShowAllReservesActive(data) {
+    this.showAllReservesActive = data;
   }
 }

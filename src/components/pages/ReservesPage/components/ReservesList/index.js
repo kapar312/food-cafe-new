@@ -2,18 +2,17 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {inject, observer} from "mobx-react";
 import {toast} from "react-toastify";
 import {useMediaQuery} from "react-responsive";
-import moment from "moment";
 
-import ButtonPrimary from "../../../buttons/ButtonPrimary";
-import {IconCalendar, IconCheck, IconNotice, IconUser} from "../../../Icons";
-import Skeleton from "../../ConfirmationReservesPage/components/Skeleton";
-import Placeholder from "../../ConfirmationReservesPage/components/Placeholder";
-import TableSort from "../../../common/TableSort";
+import {IconNotice, IconUser} from "../../../../Icons";
+import Skeleton from "../../../ConfirmationReservesPage/components/Skeleton";
+import TableSort from "../../../../common/TableSort";
+import ReservesPlaceholder from "../ReservesPlaceholder";
 
-import {formatPrice} from "../../ConfirmationReservesPage/helpers";
-import {EButtonSize} from "../../../buttons/consts";
+import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
+import {datesMockups} from "../../../../../mockup/datesMockup";
+import AlertPlaceholder from "../../../../common/AlertPlaceholder";
 
-const Reservations = inject("store")(
+const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
     const [errorText, setErrorText] = useState("");
     const [fetching, setFetching] = useState(true);
@@ -55,7 +54,7 @@ const Reservations = inject("store")(
     };
 
     const renderRows = (data) => {
-      return data?.map((item, index) => {
+      return data?.map((item) => {
         return {
           fullname: () => (
             <div className="user-info">
@@ -68,25 +67,6 @@ const Reservations = inject("store")(
           reservationType: () => item.reservationType,
           amount: () => formatPrice(item.price),
           guests: () => item.peopleCount,
-          action: () =>
-            isSmallTablet ? (
-              <ButtonPrimary
-                onClick={() => console.log(item.id)}
-                buttonColor="primary"
-                disabled={!item.canCheckIn}
-              >
-                <IconCheck color="#FFFFFF" />
-              </ButtonPrimary>
-            ) : (
-              <ButtonPrimary
-                onClick={() => console.log(item.id)}
-                buttonColor="primary"
-                buttonSize={EButtonSize.sm}
-                disabled={!item.canCheckIn}
-              >
-                Подтвердить
-              </ButtonPrimary>
-            ),
         };
       });
     };
@@ -151,11 +131,6 @@ const Reservations = inject("store")(
             }, isDesc);
           },
         },
-        {
-          id: "action",
-          type: "empty",
-          sorting: () => {},
-        },
       ];
 
       return {
@@ -166,13 +141,24 @@ const Reservations = inject("store")(
     }, [isBigTablet, isSmallTablet, renderRows]);
 
     const content = useMemo(() => {
+      const dateInCalendar = datesMockups.find(
+        (item) => item.date === reserves.selectedCalendarDate
+      );
+
       if (fetching) {
         return <Skeleton />;
       }
 
       if (reserves.reservesList?.length <= 0) {
+        return <ReservesPlaceholder />;
+      }
+
+      if (dateInCalendar?.isAvailable === false) {
         return (
-          <Placeholder error={false} lastDigitsOfNumber={reserves.lastDigitsOfNumber} />
+          <AlertPlaceholder
+            text="Вы закрыли прием гостей на выбранную дату"
+            isClosable={false}
+          />
         );
       }
 
@@ -180,23 +166,11 @@ const Reservations = inject("store")(
         return <TableSort skeleton={prepareSkeleton()} data={reserves.reservesList} />;
       }
 
-      return (
-        <Placeholder
-          error={false}
-          errorText={errorText}
-          lastDigitsOfNumber={reserves.lastDigitsOfNumber}
-        />
-      );
-    }, [
-      errorText,
-      fetching,
-      reserves.lastDigitsOfNumber,
-      prepareSkeleton,
-      reserves.reservesList,
-    ]);
+      return <ReservesPlaceholder />;
+    }, [fetching, reserves.reservesList, reserves.selectedCalendarDate, prepareSkeleton]);
 
     return <div className="reserves-page_list__wrapper">{content}</div>;
   })
 );
 
-export default Reservations;
+export default ReservesList;

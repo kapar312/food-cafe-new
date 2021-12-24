@@ -1,6 +1,6 @@
 import React from "react";
 
-import {IconLock} from "../../../Icons";
+import {IconLock} from "../../../../Icons";
 
 const CalendarInfo = () => {
   return (
