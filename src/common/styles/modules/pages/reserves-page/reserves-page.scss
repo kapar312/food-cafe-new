@@ -86,7 +86,7 @@
       .btn-custom {
         width: 100%;
         font-size: 14px;
-        &._active{
+        &._active {
           border-color: $secondaryColor;
         }
       }
@@ -125,15 +125,15 @@
       }
     }
   }
-  &_placeholder{
-    &__wrapper{
+  &_placeholder {
+    &__wrapper {
       display: flex;
       align-items: center;
     }
-    &__icon{
+    &__icon {
       display: flex;
       justify-content: center;
-      span{
+      span {
         width: 36px;
         height: 36px;
         border-radius: $circleBorderRadius;

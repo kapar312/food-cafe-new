@@ -125,10 +125,10 @@
               }
             }
           }
-          &--disabled{
+          &--disabled {
             color: $disabledColor !important;
-            .react-datepicker__day--inner{
-              &._disabled{
+            .react-datepicker__day--inner {
+              &._disabled {
                 color: $disabledColor !important;
               }
             }
