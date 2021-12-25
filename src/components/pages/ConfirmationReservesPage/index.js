@@ -19,6 +19,7 @@ import ConfirmationPlaceholder from "./components/ConfirmationPlaceholder";
 import {formatLastDigits, formatPrice} from "./helpers";
 import {CONFIRMATION_PAGE} from "../../../consts/routes.const";
 import AlertPlaceholder from "../../common/AlertPlaceholder";
+import {COLOR_WHITE} from "../../../consts/colors.const";
 
 const ConfirmationReservesPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -281,16 +282,21 @@ const ConfirmationReservesPage = inject("store")(
       reserves.reservesList,
     ]);
 
+    const headerContent = (iconColor, iconClassName) => {
+      return (
+        <>
+          <NavLink to={CONFIRMATION_PAGE} className={iconClassName}>
+            <IconArrow color={iconColor} />
+          </NavLink>
+          Резервы для номера **** {formatLastDigits(reserves.lastDigitsOfNumber)}
+        </>
+      );
+    };
+
     return (
       <Layout
-        headerTitle={
-          <>
-            <NavLink to={CONFIRMATION_PAGE} className="confirmation-reserves_head__back">
-              <IconArrow />
-            </NavLink>
-            Резервы для номера **** {formatLastDigits(reserves.lastDigitsOfNumber)}
-          </>
-        }
+        headerTitle={headerContent(null, "header_btn-back transparent")}
+        headerMobileContent={headerContent(COLOR_WHITE, "header_btn-back")}
         className="confirmation-reserves_layout"
       >
         <>

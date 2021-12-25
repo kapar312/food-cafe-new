@@ -1,0 +1,12 @@
+@media (min-width: $xs-media) and (max-width: $sm-media-z) {
+  .auth-page {
+    &_wrapper {
+      padding: 10vh 15px;
+    }
+    &_form {
+      &__wrapper {
+        padding: 50px 30px;
+      }
+    }
+  }
+}

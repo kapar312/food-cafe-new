@@ -1,15 +1,17 @@
 import React, {useState} from "react";
 import {inject, observer} from "mobx-react";
-import {useHistory} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import {Formik, Form} from "formik";
 import {toast} from "react-toastify";
 
 import SearchReservesInput from "./components/SearchReservesInput";
 import Layout from "../../segments/Layout";
 
-import {CONFIRMATION_RESERVES_PAGE} from "../../../consts/routes.const";
+import {CONFIRMATION_RESERVES_PAGE, MAIN_PAGE} from "../../../consts/routes.const";
 import {formSchema, initialValues} from "./formAttrs";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
+import IconArrow from "../../Icons/common/IconArrow";
+import {COLOR_WHITE} from "../../../consts/colors.const";
 
 const ConfirmationPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -50,7 +52,18 @@ const ConfirmationPage = inject("store")(
     };
 
     return (
-      <Layout headerTitle="Подтвердить бронирование" className="confirmation-page_layout">
+      <Layout
+        headerTitle="Подтвердить бронирование"
+        className="confirmation-page_layout"
+        headerMobileContent={
+          <>
+            <NavLink to={MAIN_PAGE} className="header_btn-back">
+              <IconArrow color={COLOR_WHITE} />
+            </NavLink>
+            Подтвердить бронирование
+          </>
+        }
+      >
         <div className="confirmation-page_wrapper">
           <Formik
             initialValues={initialValues}

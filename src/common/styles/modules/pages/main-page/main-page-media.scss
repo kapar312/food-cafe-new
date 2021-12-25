@@ -1,0 +1,12 @@
+@media (min-width: $xs-media) and (max-width: $sm-media-z) {
+  .main-page {
+    &_wrapper {
+      h1 {
+        font-size: $lgFontSize;
+        line-height: $lgLineHeight;
+        text-align: center;
+        margin-bottom: 100px;
+      }
+    }
+  }
+}
