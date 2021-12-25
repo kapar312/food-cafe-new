@@ -1,5 +1,20 @@
 export const datesMockups = [
   {
+    date: "13.12.2021",
+    isAvailable: true,
+    reservesCount: 11,
+  },
+  {
+    date: "14.12.2021",
+    isAvailable: false,
+    reservesCount: 11,
+  },
+  {
+    date: "15.12.2021",
+    isAvailable: false,
+    reservesCount: 0,
+  },
+  {
     date: "20.12.2021",
     isAvailable: true,
     reservesCount: 11,

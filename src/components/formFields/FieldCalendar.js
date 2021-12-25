@@ -20,6 +20,8 @@ const FieldCalendar = inject("store")(
       onChange,
       defaultValue,
       customDatesArray,
+      minDate,
+      selected,
     }) => {
       const onFiledChange = (date) => {
         const selectedDay = addZeroBefore(new Date(date).getDate());
@@ -82,12 +84,14 @@ const FieldCalendar = inject("store")(
           {label && <label className="form-field_label">{label}</label>}
           <div className="form-field_inner-wrapper">
             <DatePicker
+              // selected={selected}
               inline={true}
               locale={ru}
               onChange={(date) => onFiledChange(date)}
               calendarClassName={cn("form-field_field", fieldClassName)}
               showNavigation={false}
               renderDayContents={!!customDatesArray?.length && renderDays}
+              minDate={minDate}
             />
             {errorName && (
               <ErrorMessage name={errorName}>

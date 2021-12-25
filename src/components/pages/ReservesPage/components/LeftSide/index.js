@@ -1,14 +1,14 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {inject, observer} from "mobx-react";
 
-import FieldCalendar from "../../../formFields/FieldCalendar";
-import ButtonPrimary from "../../../buttons/ButtonPrimary";
-import FieldSwitch from "../../../formFields/FieldSwitch";
+import FieldCalendar from "../../../../formFields/FieldCalendar";
+import FieldSwitch from "../../../../formFields/FieldSwitch";
+import ModalNotAvailableReserve from "../../../../modals/ModalNotAvailableReserve";
+import CalendarInfo from "../CalendarInfo";
+import FormActions from "../FormActions";
 
-import {EButtonColor} from "../../../buttons/consts";
-import CalendarInfo from "./CalendarInfo";
-import {datesMockups} from "../../../../mockup/datesMockup";
-import ModalNotAvailableReserve from "../../../modals/ModalNotAvailableReserve";
+import {datesMockups} from "../../../../../mockup/datesMockup";
+import {EReservesTabsNames} from "../../../../../consts/reserves.const";
 
 const LeftSide = inject("store")(
   observer(({store: {reserves}}) => {
@@ -28,6 +28,7 @@ const LeftSide = inject("store")(
 
     const onDatePickerClick = (name, date) => {
       console.log("onDatePickerClick", name, date);
+      reserves.setShowAllReservesActive(false);
     };
 
     useEffect(() => {
@@ -49,23 +50,25 @@ const LeftSide = inject("store")(
     }, [reserves.selectedCalendarDate]);
 
     const switchContent = useMemo(() => {
+      if (
+        reserves.activeReservesTab === EReservesTabsNames.confirmed ||
+        reserves.activeReservesTab === EReservesTabsNames.history
+      ) {
+        return <></>;
+      }
       return (
         <div className="reserves-page_switch__wrapper">
           <FieldSwitch
             name="isAvailable"
             onChange={(name, value) => onSwitchClick(name, value)}
             value={switchValue}
+            isDisabled={!reserves.selectedCalendarDate}
           />
           Не принимать гостей
         </div>
       );
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [switchValue]);
-
-    useEffect(() => {
-      console.log("switchValue", switchValue);
-      console.log("switchValue", switchValue);
-    }, [switchValue]);
+    }, [switchValue, reserves.activeReservesTab, reserves.selectedCalendarDate]);
 
     return (
       <div className="reserves-page_left-side">
@@ -84,12 +87,13 @@ const LeftSide = inject("store")(
             name="date"
             onChange={(name, date) => onDatePickerClick(name, date)}
             customDatesArray={reserves.datesList}
+            minDate={
+              reserves.activeReservesTab === EReservesTabsNames.future
+                ? new Date()
+                : new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+            }
           />
-          <div className="reserves-page_form__actions">
-            <ButtonPrimary buttonColor={EButtonColor.default}>
-              Показать все бронирования в этом месяце
-            </ButtonPrimary>
-          </div>
+          <FormActions />
         </div>
         {switchContent}
         <ModalNotAvailableReserve

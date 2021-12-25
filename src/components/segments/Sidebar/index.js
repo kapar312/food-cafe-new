@@ -13,6 +13,7 @@ import {
 } from "../../../consts/routes.const";
 import {COLOR_PRIMARY} from "../../../consts/colors.const";
 import IconUser from "../../Icons/common/IconUser";
+import IconExit from "../../Icons/common/IconExit";
 
 const Sidebar = ({setSidebarWidth}) => {
   const sidebarRef = useRef(null);
@@ -44,7 +45,7 @@ const Sidebar = ({setSidebarWidth}) => {
           <Logout
             component={
               <NavLink to={LOGIN_PAGE} className="sidebar_exit__item">
-                Выйти
+                <IconExit /> Выйти
               </NavLink>
             }
           />

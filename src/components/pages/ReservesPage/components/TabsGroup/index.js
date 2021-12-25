@@ -1,8 +1,10 @@
 import React from "react";
 import cn from "classnames";
 import {inject, observer} from "mobx-react";
-import {reservesTabs} from "../../../../consts/reserves.const";
-import ButtonPrimary from "../../../buttons/ButtonPrimary";
+
+import ButtonPrimary from "../../../../buttons/ButtonPrimary";
+
+import {reservesTabs} from "../../../../../consts/reserves.const";
 
 const TabsGroup = inject("store")(
   observer(({store: {reserves}}) => {

@@ -5,7 +5,7 @@ import {CONFIRMATION_PAGE} from "../../../../../consts/routes.const";
 
 import {formatLastDigits} from "../../helpers";
 
-const Placeholder = ({error, lastDigitsOfNumber, errorText}) => {
+const ConfirmationPlaceholder = ({error, lastDigitsOfNumber, errorText}) => {
   return error ? (
     <div className="confirmation-reserves_placeholder__wrapper">
       <p>Ошибка по номеру {formatLastDigits(lastDigitsOfNumber)}</p>
@@ -28,4 +28,4 @@ const Placeholder = ({error, lastDigitsOfNumber, errorText}) => {
   );
 };
 
-export default Placeholder;
+export default ConfirmationPlaceholder;

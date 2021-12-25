@@ -1,7 +1,7 @@
 import React from "react";
 
-import TabsGroup from "./TabsGroup";
-import Reservations from "./Reservations";
+import ReservesList from "../ReservesList";
+import TabsGroup from "../TabsGroup";
 
 const RightSide = () => {
   return (
@@ -10,7 +10,7 @@ const RightSide = () => {
         <h3 className="reserves-page_head__title">Резервы</h3>
         <TabsGroup />
       </div>
-      <Reservations />
+      <ReservesList />
     </div>
   );
 };

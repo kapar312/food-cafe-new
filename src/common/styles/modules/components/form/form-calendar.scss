@@ -78,9 +78,9 @@
             font-weight: bold;
             border: 1px solid $ghost;
           }
-          &--weekend {
-            color: $textColorPrimary;
-          }
+          //&--weekend {
+          //  color: $textColorPrimary;
+          //}
           &--outside-month {
             color: $ghost !important;
           }
@@ -122,6 +122,14 @@
                 height: 5px;
                 border-radius: $circleBorderRadius;
                 background-color: $secondaryColor;
+              }
+            }
+          }
+          &--disabled {
+            color: $disabledColor !important;
+            .react-datepicker__day--inner {
+              &._disabled {
+                color: $disabledColor !important;
               }
             }
           }
