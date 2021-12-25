@@ -1,4 +1,4 @@
-.header-mobile{
+.header-mobile {
   &_wrapper {
     position: fixed;
     top: 0;
@@ -12,8 +12,8 @@
     background-color: $mobileHeaderBgColor;
     box-shadow: $bsBoxShadow;
     z-index: $zIndexHeader;
-    &.main-page{
-      .header-mobile_inner-wrapper{
+    &.main-page {
+      .header-mobile_inner-wrapper {
         justify-content: center;
       }
     }
