@@ -75,7 +75,7 @@ const LoginForm = inject("store")(
                     !isEmpty(errors)
                   }
                 >
-                  Далее
+                  Войти
                 </ButtonPrimary>
               </Form>
             </div>

@@ -291,6 +291,14 @@ const ConfirmationReservesPage = inject("store")(
             Резервы для номера **** {formatLastDigits(reserves.lastDigitsOfNumber)}
           </>
         }
+        headerMobileContent={
+          <>
+            <NavLink to={CONFIRMATION_PAGE} className="confirmation-reserves_head__back">
+              <IconArrow />
+            </NavLink>
+            Резервы для номера **** {formatLastDigits(reserves.lastDigitsOfNumber)}
+          </>
+        }
         className="confirmation-reserves_layout"
       >
         <>
