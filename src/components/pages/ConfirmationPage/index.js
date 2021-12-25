@@ -11,6 +11,7 @@ import {CONFIRMATION_RESERVES_PAGE, MAIN_PAGE} from "../../../consts/routes.cons
 import {formSchema, initialValues} from "./formAttrs";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import IconArrow from "../../Icons/common/IconArrow";
+import {COLOR_WHITE} from "../../../consts/colors.const";
 
 const ConfirmationPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -56,8 +57,8 @@ const ConfirmationPage = inject("store")(
         className="confirmation-page_layout"
         headerMobileContent={
           <>
-            <NavLink to={MAIN_PAGE} className="confirmation-reserves_head__back">
-              <IconArrow />
+            <NavLink to={MAIN_PAGE} className="header_btn-back">
+              <IconArrow color={COLOR_WHITE} />
             </NavLink>
             Подтвердить бронирование
           </>

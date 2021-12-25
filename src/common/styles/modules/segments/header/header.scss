@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     min-height: 60px;
-    padding: 8px 25px;
+    padding: 8px 30px;
     background-color: $headerBgColor;
     box-shadow: $bsBoxShadow;
     z-index: $zIndexHeader;
@@ -34,6 +34,27 @@
   &_actions {
     &__wrapper {
       margin-left: auto;
+    }
+  }
+  &_btn-back {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $circleBorderRadius;
+    margin-right: 15px;
+    flex: 0 0 auto;
+    &:hover {
+      background-color: $primaryColorHover;
+    }
+    &.transparent{
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+    img {
+      height: 16px;
     }
   }
 }
