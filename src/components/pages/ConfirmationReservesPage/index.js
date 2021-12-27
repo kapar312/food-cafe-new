@@ -20,6 +20,7 @@ import {formatLastDigits, formatPrice} from "./helpers";
 import {CONFIRMATION_PAGE} from "../../../consts/routes.const";
 import AlertPlaceholder from "../../common/AlertPlaceholder";
 import {COLOR_WHITE} from "../../../consts/colors.const";
+import {toJS} from "mobx";
 
 const ConfirmationReservesPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -138,7 +139,7 @@ const ConfirmationReservesPage = inject("store")(
               <ButtonPrimary
                 onClick={() => doReserve(item.id)}
                 buttonColor="primary"
-                disabled={!item.canCheckIn}
+                isDisabled={!item.canCheckIn}
               >
                 <IconCheck color="#FFFFFF" />
               </ButtonPrimary>
@@ -146,7 +147,7 @@ const ConfirmationReservesPage = inject("store")(
               <ButtonPrimary
                 onClick={() => doReserve(item.id)}
                 buttonColor="primary"
-                disabled={!item.canCheckIn}
+                isDisabled={!item.canCheckIn}
               >
                 Подтвердить
               </ButtonPrimary>
