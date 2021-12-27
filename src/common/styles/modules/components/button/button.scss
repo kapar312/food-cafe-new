@@ -51,9 +51,11 @@
       background-color: $defaultColorHover;
     }
     &.__disabled {
+      background-color: $seashell !important;
       &:hover {
         color: $textColorBlack;
-        background-color: $white !important;
+        background-color: $seashell !important;
+        box-shadow: none;
       }
     }
   }

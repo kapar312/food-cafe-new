@@ -84,7 +84,7 @@ const FieldCalendar = inject("store")(
           {label && <label className="form-field_label">{label}</label>}
           <div className="form-field_inner-wrapper">
             <DatePicker
-              // selected={selected}
+              selected={selected}
               inline={true}
               locale={ru}
               onChange={(date) => onFiledChange(date)}

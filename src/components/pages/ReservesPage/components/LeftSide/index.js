@@ -7,7 +7,6 @@ import ModalNotAvailableReserve from "../../../../modals/ModalNotAvailableReserv
 import CalendarInfo from "../CalendarInfo";
 import FormActions from "../FormActions";
 
-import {datesMockups} from "../../../../../mockup/datesMockup";
 import {EReservesTabsNames} from "../../../../../consts/reserves.const";
 
 const LeftSide = inject("store")(
@@ -16,27 +15,34 @@ const LeftSide = inject("store")(
     const [switchValue, setSwitchValue] = useState(false);
 
     const onSwitchClick = (name, nextChecked) => {
-      for (let i = 0; i < datesMockups.length; i++) {
-        if (datesMockups[i].date === reserves.selectedCalendarDate) {
-          if (datesMockups[i].isAvailable && datesMockups[i].reservesCount > 0) {
+      const dateList = reserves.datesList;
+      for (let i = 0; i < dateList?.length; i++) {
+        if (dateList[i].date === reserves.selectedCalendarDate) {
+          if (dateList[i].isAvailable && dateList[i].reservesCount > 0) {
             setNotAvailableModalVisible(true);
           } else setSwitchValue(nextChecked);
           break;
         }
       }
+      console.log("nextChecked", nextChecked);
+      reserves
+        .handleReservationDate(
+          reserves.selectedCalendarDate,
+          nextChecked ? "Close" : "Open"
+        )
+        .finally(() => console.log("red"));
     };
 
     const onDatePickerClick = (name, date) => {
-      console.log("onDatePickerClick", name, date);
       reserves.setShowAllReservesActive(false);
     };
 
     useEffect(() => {
-      reserves.setDatesList(datesMockups);
+      reserves.setDatesList([]);
     }, [reserves]);
 
     const changeSwitchValue = () => {
-      const dateInCalendar = datesMockups.find(
+      const dateInCalendar = reserves.datesList.find(
         (item) => item.date === reserves.selectedCalendarDate
       );
       if (dateInCalendar?.isAvailable !== undefined) {
@@ -52,7 +58,8 @@ const LeftSide = inject("store")(
     const switchContent = useMemo(() => {
       if (
         reserves.activeReservesTab === EReservesTabsNames.confirmed ||
-        reserves.activeReservesTab === EReservesTabsNames.history
+        reserves.activeReservesTab === EReservesTabsNames.history ||
+        !reserves.selectedCalendarDate
       ) {
         return <></>;
       }
@@ -86,7 +93,7 @@ const LeftSide = inject("store")(
             fieldClassName="reserves-page_form__field"
             name="date"
             onChange={(name, date) => onDatePickerClick(name, date)}
-            customDatesArray={reserves.datesList}
+            // customDatesArray={reserves.datesList}
             minDate={
               reserves.activeReservesTab === EReservesTabsNames.future
                 ? new Date()

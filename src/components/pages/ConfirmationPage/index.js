@@ -91,7 +91,7 @@ const ConfirmationPage = inject("store")(
                     />
                     <ButtonPrimary
                       type="submit"
-                      disabled={!isValid}
+                      isDisabled={!isValid}
                       buttonColor="primary"
                     >
                       Далее

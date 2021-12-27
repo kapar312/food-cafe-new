@@ -31,7 +31,6 @@ const MainPage = inject("store")(
         <div className="main-page_wrapper">
           <div className="main-page_inner-wrapper">
             <h1>Добро пожаловать в FoodWorking</h1>
-
             {isTablet && (
               <div className="main-page_links__wrapper">
                 <div className="main-page_links__inner-wrapper">

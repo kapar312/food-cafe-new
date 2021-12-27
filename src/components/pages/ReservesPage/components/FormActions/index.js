@@ -21,6 +21,7 @@ const FormActions = inject("store")(
           buttonColor={EButtonColor.default}
           className={cn({_active: reserves.showAllReservesActive})}
           onClick={showAllReserves}
+          isDisabled={!reserves.activeReservesTab}
         >
           Показать все бронирования в этом месяце
         </ButtonPrimary>
