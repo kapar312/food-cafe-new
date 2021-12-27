@@ -1,15 +1,16 @@
 import axiosInstance from "../../api/api";
-import {ACCESS_TOKEN, ACCESS_TOKEN_EXPIRES, LOGIN} from "../../consts/auth.const";
+import {ACCESS_TOKEN, ACCESS_TOKEN_EXPIRES, ADMIN_ROLE} from "../../consts/auth.const";
 import {setStorage} from "../../services/storage.service";
 import {toast} from "react-toastify";
 
 export class AuthAction {
   login(data) {
     return axiosInstance
-      .post(LOGIN, data)
+      .post("/auth/hostess/signin", data)
       .then(({data}) => {
         setStorage(ACCESS_TOKEN, data.accessToken);
         setStorage(ACCESS_TOKEN_EXPIRES, data.accessTokenExpiresAtUtc);
+        setStorage(ADMIN_ROLE, data.role);
         this.setUserData(data.user);
       })
       .catch((error) => {
