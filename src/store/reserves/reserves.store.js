@@ -7,6 +7,8 @@ class ReservesStore extends ReservesAction {
   lastDigitsOfNumber = "";
   activeReservesTab = null;
   selectedCalendarDate = null;
+  selectedCalendarMonth = null;
+  selectedCalendarYear = null;
   showAllReservesActive = false;
   datesList = [];
 }
@@ -18,6 +20,7 @@ ReservesStore = decorate(ReservesAction, {
   lastDigitsOfNumber: observable,
   activeReservesTab: observable,
   selectedCalendarDate: observable,
+  selectedCalendarMonth: observable,
   datesList: observable,
   showAllReservesActive: observable,
 });

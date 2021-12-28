@@ -10,11 +10,7 @@ import ReservesPlaceholder from "../ReservesPlaceholder";
 
 import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
 import AlertPlaceholder from "../../../../common/AlertPlaceholder";
-import {
-  EReservationStatus,
-  EReservesTabsNames,
-} from "../../../../../consts/reserves.const";
-import {toJS} from "mobx";
+import {convertDateToDMYFormat} from "../../../../../helper/time.helper";
 
 const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
@@ -26,6 +22,7 @@ const ReservesList = inject("store")(
 
     const getReservesData = (dateFrom) => {
       setFetching(true);
+      console.log("dateFrom", dateFrom);
       reserves
         .getReservesDataByDate(dateFrom)
         .catch((error) => {
@@ -45,7 +42,7 @@ const ReservesList = inject("store")(
     };
 
     useEffect(() => {
-      getReservesData(reserves.selectedCalendarDate);
+      getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.selectedCalendarDate, reserves.activeReservesTab]);
 
@@ -146,10 +143,8 @@ const ReservesList = inject("store")(
 
     const content = useMemo(() => {
       const dateInCalendar = reserves.datesList?.find(
-        (item) => item.date === reserves.selectedCalendarDate
+        (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
       );
-
-      console.log("dateInCalendar", toJS(dateInCalendar));
 
       if (fetching) {
         return <Skeleton />;

@@ -3,6 +3,7 @@ import {inject, observer} from "mobx-react";
 
 import {COLOR_WHITE} from "../../../../../consts/colors.const";
 import {IconExclamationPoint} from "../../../../Icons";
+import {convertDateToDMYFormat} from "../../../../../helper/time.helper";
 
 const ReservesPlaceholder = inject("store")(
   observer(({store: {reserves}, errorText}) => {
@@ -17,7 +18,7 @@ const ReservesPlaceholder = inject("store")(
                 <IconExclamationPoint color={COLOR_WHITE} />
               </span>
             </div>
-            <p>Нет резервов на {reserves.selectedCalendarDate}</p>
+            <p>Нет резервов на {convertDateToDMYFormat(reserves.selectedCalendarDate)}</p>
           </>
         )}
       </div>

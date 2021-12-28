@@ -35,8 +35,17 @@
     }
     &__title {
       font-size: $lgFontSize;
-      line-height: $mdLineHeight;
+      line-height: $lgLineHeight;
       font-family: $primaryFontMedium;
+      position: relative;
+      b{
+        position: absolute;
+        bottom: 60%;
+        left: 110%;
+        font-size: $bsFontSize;
+        line-height: $bsLineHeight;
+        color: $textColorSecondary;
+      }
     }
     &__date {
       font-size: $bsFontSize;
