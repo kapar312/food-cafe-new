@@ -45,7 +45,7 @@ const Sidebar = ({setSidebarWidth}) => {
           <Logout
             component={
               <NavLink to={LOGIN_PAGE} className="sidebar_exit__item">
-                <IconExit /> Выйти
+                <IconExit color={COLOR_PRIMARY} /> Выход
               </NavLink>
             }
           />

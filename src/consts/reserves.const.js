@@ -21,3 +21,18 @@ export const reservesTabs = [
     value: EReservesTabsNames.history,
   },
 ];
+
+export const EReservesDateStatus = {
+  open: "Open",
+  close: "Close",
+};
+
+export const EReservationStatus = {
+  payment: "Payment", // пользователь сделал запрос на создание резерва
+  paymentFailed: "PaymentFailed", // в отведенные 10 минут пользователь не произвел успешную оплату / пользователь отменил оплату
+  waitingForCheckIn: "WaitingForCheckIn", // статус проставляется, когда пользователь успешно оплатил заказ // "Будущие"
+  inProgress: "InProgress", // Произошло событие CheckIn // "Подтвержденные"
+  done: "Done", // ставится, когда пользователь сделал CheckOut, либо кончился день, в который была бронь // "История"
+  canceled: "Canceled", // ставится, когда произошло событие отмены резерва // "История"
+  wasted: "Wasted", // ставится, когда бронь уже началась, но не был сделан CheckIn // "История"
+};

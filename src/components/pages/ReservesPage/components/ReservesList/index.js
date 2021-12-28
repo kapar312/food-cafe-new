@@ -9,8 +9,12 @@ import TableSort from "../../../../common/TableSort";
 import ReservesPlaceholder from "../ReservesPlaceholder";
 
 import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
-import {datesMockups} from "../../../../../mockup/datesMockup";
 import AlertPlaceholder from "../../../../common/AlertPlaceholder";
+import {
+  EReservationStatus,
+  EReservesTabsNames,
+} from "../../../../../consts/reserves.const";
+import {toJS} from "mobx";
 
 const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
@@ -20,10 +24,10 @@ const ReservesList = inject("store")(
     const isBigTablet = useMediaQuery({minWidth: 768, maxWidth: 991});
     const isSmallTablet = useMediaQuery({minWidth: 320, maxWidth: 767});
 
-    const getReservesData = () => {
+    const getReservesData = (dateFrom) => {
       setFetching(true);
       reserves
-        .getReservesDataByDate()
+        .getReservesDataByDate(dateFrom)
         .catch((error) => {
           if (error) {
             if (error?.statusText?.length) {
@@ -41,12 +45,12 @@ const ReservesList = inject("store")(
     };
 
     useEffect(() => {
-      getReservesData();
+      getReservesData(reserves.selectedCalendarDate);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [reserves.selectedCalendarDate, reserves.activeReservesTab]);
 
     const sortReservesList = (sortFn, isDesc) => {
-      let sorted = reserves.reservesList.slice().sort(sortFn);
+      let sorted = reserves.reservesListByDate.slice().sort(sortFn);
       if (isDesc) {
         sorted.reverse();
       }
@@ -59,7 +63,7 @@ const ReservesList = inject("store")(
           fullname: () => (
             <div className="user-info">
               <h4 className="user-info__subtitle">
-                {item.reservationDate} - {item.reservationHours.from}
+                {item.reservationDate} - {item.reservationHours?.from}
               </h4>
               <h3 className="user-info__title">{item.fullName}</h3>
             </div>
@@ -141,16 +145,14 @@ const ReservesList = inject("store")(
     }, [isBigTablet, isSmallTablet, renderRows]);
 
     const content = useMemo(() => {
-      const dateInCalendar = datesMockups.find(
+      const dateInCalendar = reserves.datesList?.find(
         (item) => item.date === reserves.selectedCalendarDate
       );
 
+      console.log("dateInCalendar", toJS(dateInCalendar));
+
       if (fetching) {
         return <Skeleton />;
-      }
-
-      if (reserves.reservesList?.length <= 0) {
-        return <ReservesPlaceholder />;
       }
 
       if (dateInCalendar?.isAvailable === false) {
@@ -162,12 +164,24 @@ const ReservesList = inject("store")(
         );
       }
 
-      if (reserves.reservesList?.length > 0) {
-        return <TableSort skeleton={prepareSkeleton()} data={reserves.reservesList} />;
+      if (reserves.reservesListByDate?.length <= 0) {
+        return <ReservesPlaceholder />;
+      }
+
+      if (reserves.reservesListByDate?.length > 0) {
+        return (
+          <TableSort skeleton={prepareSkeleton()} data={reserves.reservesListByDate} />
+        );
       }
 
       return <ReservesPlaceholder />;
-    }, [fetching, reserves.reservesList, reserves.selectedCalendarDate, prepareSkeleton]);
+    }, [
+      fetching,
+      reserves.reservesListByDate,
+      reserves.selectedCalendarDate,
+      reserves.datesList,
+      prepareSkeleton,
+    ]);
 
     return <div className="reserves-page_list__wrapper">{content}</div>;
   })
