@@ -26,3 +26,10 @@ export const getTokenExpires = (tokenExpires, changeResponse) => {
   if (changeResponse) return new Date().toISOString();
   return undefined;
 };
+
+export const getNowTime = () => {
+  const currentDay = addZeroBefore(new Date().getDate());
+  const currentMonth = addZeroBefore(new Date().getMonth() + 1);
+  const currentYear = new Date().getFullYear();
+  return `${currentDay}.${currentMonth}.${currentYear}`;
+};

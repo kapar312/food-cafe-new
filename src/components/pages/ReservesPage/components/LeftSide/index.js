@@ -7,7 +7,11 @@ import ModalNotAvailableReserve from "../../../../modals/ModalNotAvailableReserv
 import CalendarInfo from "../CalendarInfo";
 import FormActions from "../FormActions";
 
-import {EReservesTabsNames} from "../../../../../consts/reserves.const";
+import {
+  EReservesDateStatus,
+  EReservesTabsNames,
+} from "../../../../../consts/reserves.const";
+import {toJS} from "mobx";
 
 const LeftSide = inject("store")(
   observer(({store: {reserves}}) => {
@@ -20,17 +24,16 @@ const LeftSide = inject("store")(
         if (dateList[i].date === reserves.selectedCalendarDate) {
           if (dateList[i].isAvailable && dateList[i].reservesCount > 0) {
             setNotAvailableModalVisible(true);
-          } else setSwitchValue(nextChecked);
+          } else {
+            setSwitchValue(nextChecked);
+            reserves.handleReservationDate(
+              reserves.selectedCalendarDate,
+              nextChecked ? EReservesDateStatus.close : EReservesDateStatus.open
+            );
+          }
           break;
         }
       }
-      console.log("nextChecked", nextChecked);
-      reserves
-        .handleReservationDate(
-          reserves.selectedCalendarDate,
-          nextChecked ? "Close" : "Open"
-        )
-        .finally(() => console.log("red"));
     };
 
     const onDatePickerClick = (name, date) => {
@@ -55,6 +58,11 @@ const LeftSide = inject("store")(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.selectedCalendarDate]);
 
+    useEffect(() => {
+      reserves.getDateList();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const switchContent = useMemo(() => {
       if (
         reserves.activeReservesTab === EReservesTabsNames.confirmed ||
@@ -77,6 +85,27 @@ const LeftSide = inject("store")(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [switchValue, reserves.activeReservesTab, reserves.selectedCalendarDate]);
 
+    const calendarContent = useMemo(() => {
+      return (
+        <FieldCalendar
+          fieldClassName="reserves-page_form__field"
+          name="date"
+          onChange={(name, date) => onDatePickerClick(name, date)}
+          customDatesArray={reserves.datesList}
+          minDate={
+            reserves.activeReservesTab === EReservesTabsNames.future
+              ? new Date()
+              : new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+          }
+        />
+      );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.activeReservesTab, reserves.datesList]);
+
+    useEffect(() => {
+      console.log("reserves.datesList", toJS(reserves.datesList));
+    }, [reserves.datesList]);
+
     return (
       <div className="reserves-page_left-side">
         <div className="reserves-page_head__wrapper">
@@ -89,17 +118,7 @@ const LeftSide = inject("store")(
         </div>
         <CalendarInfo />
         <div className="reserves-page_form__wrapper">
-          <FieldCalendar
-            fieldClassName="reserves-page_form__field"
-            name="date"
-            onChange={(name, date) => onDatePickerClick(name, date)}
-            // customDatesArray={reserves.datesList}
-            minDate={
-              reserves.activeReservesTab === EReservesTabsNames.future
-                ? new Date()
-                : new Date(new Date().setFullYear(new Date().getFullYear() - 1))
-            }
-          />
+          {calendarContent}
           <FormActions />
         </div>
         {switchContent}

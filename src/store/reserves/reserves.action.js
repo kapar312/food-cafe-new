@@ -1,5 +1,10 @@
 import axiosInstance from "../../api/api";
 import {toast} from "react-toastify";
+import {forEach} from "lodash";
+import {toJS} from "mobx";
+import {getStatusesFromTab} from "../../helper/reserves.helper";
+import {getNowTime} from "../../helper/time.helper";
+import {EReservesDateStatus} from "../../consts/reserves.const";
 
 export class ReservesAction {
   getReservesData(lastDigitsOfNumber) {
@@ -38,16 +43,18 @@ export class ReservesAction {
     this.activeReservesTab = value;
   }
 
-  getReservesDataByDate() {
-    const params = {
-      dateFrom: "25.12.2021",
-      dateTo: "30.12.2021",
-    };
-    // this.setReservesList(reservesMockup);
+  getReservesDataByDate(dateFrom, dateTo) {
+    let url = new URLSearchParams();
+    const statuses = getStatusesFromTab(this.activeReservesTab);
+    url.append("dateFrom", dateFrom ? dateFrom : getNowTime());
+    url.append("dateTo", dateTo ? dateTo : dateFrom || getNowTime());
+    statuses.forEach((item) => {
+      url.append("statuses", item);
+    });
     return axiosInstance
-      .get("/reserve/by-date-range", {params})
+      .get(`hostess/reservations/by-date-range?${url}`)
       .then(({data}) => {
-        this.setReservesList(data);
+        this.setReservesListByDate(data.reservations);
       })
       .catch((err) => {
         throw err;
@@ -62,16 +69,51 @@ export class ReservesAction {
     this.selectedCalendarDate = data;
   }
 
+  getDateList() {
+    const params = {
+      dateFrom: "25.12.2021",
+      dateTo: "31.12.2021",
+    };
+    return axiosInstance
+      .get("hostess/reservations-calendar/by-date-range", {params})
+      .then(({data}) => {
+        this.setDatesList(data.dates);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
   setDatesList(data) {
     this.datesList = data;
   }
 
   handleReservationDate(date, action) {
-    // value = "Open" || "Close"
     return axiosInstance
-      .post(`/hostess/reservation-dates/${date}`, {action})
+      .post(
+        `/hostess/reservation-dates/${date}`,
+        {},
+        {
+          params: {action: action},
+        }
+      )
       .then(({data}) => {
-        toast.success(`На ${date} установлен статус "${action}"`);
+        toast.success(
+          `Приём гостей на ${date} число ${
+            action === EReservesDateStatus.close ? "ЗАКРЫТ" : "ОТКРЫТ"
+          }`
+        );
+        const newArray = this.datesList.map((item) => {
+          if (item.date === date) {
+            return {...item, isAvailable: action !== EReservesDateStatus.close};
+          }
+          return toJS(item);
+        });
+        this.setDatesList(newArray);
+        // this.datesList[objIndex].isAvailable = action === EReservesDateStatus.close;
+        // this.setDatesList(
+        //   (this.datesList[objIndex].isAvailable = action === EReservesDateStatus.close)
+        // );
       })
       .catch((err) => {
         toast.success(`Не удалось изменить статус на ${date}`);
