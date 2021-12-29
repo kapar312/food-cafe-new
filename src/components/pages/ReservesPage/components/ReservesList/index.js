@@ -10,7 +10,11 @@ import ReservesPlaceholder from "../ReservesPlaceholder";
 
 import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
 import AlertPlaceholder from "../../../../common/AlertPlaceholder";
-import {convertDateToDMYFormat} from "../../../../../helper/time.helper";
+import {
+  convertDateToDMYFormat,
+  getFirstDayInMonth,
+  getLastDayInMonth,
+} from "../../../../../helper/time.helper";
 
 const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
@@ -20,10 +24,10 @@ const ReservesList = inject("store")(
     const isBigTablet = useMediaQuery({minWidth: 768, maxWidth: 991});
     const isSmallTablet = useMediaQuery({minWidth: 320, maxWidth: 767});
 
-    const getReservesData = (dateFrom) => {
+    const getReservesData = (dateFrom, dateTo) => {
       setFetching(true);
       reserves
-        .getReservesDataByDate(dateFrom)
+        .getReservesDataByDate(dateFrom, dateTo)
         .catch((error) => {
           if (error) {
             if (error?.statusText?.length) {
@@ -40,6 +44,18 @@ const ReservesList = inject("store")(
         });
     };
 
+    const getAllReservesOnMonth = () => {
+      getReservesData(
+        convertDateToDMYFormat(
+          getFirstDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
+        ),
+        convertDateToDMYFormat(
+          getLastDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
+        )
+      );
+      reserves.setSelectedCalendarDate(null);
+    };
+
     useEffect(() => {
       if (reserves.selectedCalendarDate) {
         getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
@@ -51,12 +67,28 @@ const ReservesList = inject("store")(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.selectedCalendarDate]);
 
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.visibleCalendarMonth]);
+
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+      } else if (reserves.selectedCalendarDate) {
+        getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.activeReservesTab]);
+
     const sortReservesList = (sortFn, isDesc) => {
       let sorted = reserves.reservesListByDate.slice().sort(sortFn);
       if (isDesc) {
         sorted.reverse();
       }
-      reserves.setReservesList(sorted);
+      reserves.setReservesListByDate(sorted);
     };
 
     const renderRows = (data) => {
@@ -71,8 +103,8 @@ const ReservesList = inject("store")(
             </div>
           ),
           reservationType: () => item.reservationType,
-          amount: () => formatPrice(item.price),
-          guests: () => item.peopleCount,
+          price: () => formatPrice(item.price),
+          peopleCount: () => item.peopleCount,
         };
       });
     };
@@ -84,10 +116,18 @@ const ReservesList = inject("store")(
           title: "Резерв",
           sorting: (isDesc) => {
             sortReservesList((a, b) => {
-              if (a.fullName < b.fullName) {
-                return -1;
+              if (reserves.showAllReservesActive) {
+                if (a.reservationDate < b.reservationDate) {
+                  return -1;
+                } else {
+                  return 1;
+                }
               } else {
-                return 1;
+                if (a.fullName < b.fullName) {
+                  return -1;
+                } else {
+                  return 1;
+                }
               }
             }, isDesc);
           },
@@ -106,7 +146,7 @@ const ReservesList = inject("store")(
           },
         },
         {
-          id: "amount",
+          id: "price",
           title: isSmallTablet ? (
             <IconNotice color="#9399A8" />
           ) : isBigTablet ? (
@@ -125,7 +165,7 @@ const ReservesList = inject("store")(
           },
         },
         {
-          id: "guests",
+          id: "peopleCount",
           title: isSmallTablet ? <IconUser color="#9399A8" /> : "Гости",
           sorting: (isDesc) => {
             sortReservesList((a, b) => {

@@ -25,7 +25,6 @@ const FieldCalendar = inject("store")(
       selected,
     }) => {
       const onFiledChange = (date) => {
-        console.log("onFiledChange", 321);
         if (isFunction(onChange)) {
           onChange(name, date);
         }
@@ -36,7 +35,6 @@ const FieldCalendar = inject("store")(
       };
 
       const onMonthChange = (date) => {
-        console.log("onMonthChange", 123);
         reserves.setVisibleCalendarMonth(new Date(date).getMonth());
         reserves.setVisibleCalendarYear(new Date(date).getFullYear());
       };

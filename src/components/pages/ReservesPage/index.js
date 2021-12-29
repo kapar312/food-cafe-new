@@ -14,6 +14,7 @@ import {
   getFirstDayInMonth,
   getLastDayInMonth,
 } from "../../../helper/time.helper";
+import {EReservesTabsNames} from "../../../consts/reserves.const";
 
 const ReservesPage = inject("store")(
   observer(({store: {reserves}}) => {
@@ -33,27 +34,14 @@ const ReservesPage = inject("store")(
       reserves.setSelectedCalendarDate(new Date());
       reserves.setVisibleCalendarMonth(new Date().getMonth());
       reserves.setVisibleCalendarYear(`${new Date().getFullYear()}`);
+      reserves.setActiveReservesTab(EReservesTabsNames.future);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
       reserves.getDatesList();
-      if (reserves.showAllReservesActive) {
-        getAllReservesOnMonth();
-      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.visibleCalendarMonth]);
-
-    useEffect(() => {
-      if (reserves.showAllReservesActive) {
-        getAllReservesOnMonth();
-      } else if (reserves.selectedCalendarDate) {
-        reserves.getReservesDataByDate(
-          convertDateToDMYFormat(reserves.selectedCalendarDate)
-        );
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reserves.activeReservesTab]);
 
     return (
       <Layout

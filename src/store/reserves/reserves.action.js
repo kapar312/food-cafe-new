@@ -16,7 +16,7 @@ export class ReservesAction {
     return axiosInstance
       .get("hostess/reservations/by-phone-number", {params})
       .then(({data}) => {
-        this.setReservesList(data);
+        this.setReservesListByPhone(data);
       })
       .catch((err) => {
         throw err;
@@ -27,15 +27,17 @@ export class ReservesAction {
     return axiosInstance
       .post(`hostess/reservations/${reservationId}/checkin`)
       .then(() => {
-        this.reservesList = this.reservesList.filter((item) => item.id !== reservationId);
+        this.reservesListByPhone = this.reservesListByPhone.filter(
+          (item) => item.id !== reservationId
+        );
       })
       .catch((err) => {
         throw err;
       });
   }
 
-  setReservesList(data) {
-    this.reservesList = data;
+  setReservesListByPhone(data) {
+    this.reservesListByPhone = data;
   }
 
   setLastDigitsOfNumber(data) {

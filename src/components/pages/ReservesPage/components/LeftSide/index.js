@@ -20,7 +20,9 @@ const LeftSide = inject("store")(
 
     const onDatePickerClick = (name, date) => {
       reserves.setSelectedCalendarDate(date);
-      reserves.setShowAllReservesActive(false);
+      if (reserves.showAllReservesActive) {
+        reserves.setShowAllReservesActive(false);
+      }
     };
 
     const calendarContent = useMemo(() => {

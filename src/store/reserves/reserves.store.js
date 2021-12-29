@@ -2,7 +2,7 @@ import {decorate, observable} from "mobx";
 import {ReservesAction} from "./reserves.action";
 
 class ReservesStore extends ReservesAction {
-  reservesList = {};
+  reservesListByPhone = {};
   reservesListByDate = {};
   lastDigitsOfNumber = "";
   activeReservesTab = null;
@@ -16,7 +16,7 @@ class ReservesStore extends ReservesAction {
 
 // eslint-disable-next-line no-class-assign
 ReservesStore = decorate(ReservesAction, {
-  reservesList: observable,
+  reservesListByPhone: observable,
   reservesListByDate: observable,
   lastDigitsOfNumber: observable,
   activeReservesTab: observable,

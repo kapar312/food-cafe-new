@@ -20,6 +20,7 @@ const FormActions = inject("store")(
     };
 
     useEffect(() => {
+      console.log("showAllReservesActive", reserves.showAllReservesActive);
       if (reserves.showAllReservesActive) {
         reserves.getReservesDataByDate(
           convertDateToDMYFormat(
@@ -33,6 +34,8 @@ const FormActions = inject("store")(
           )
         );
         reserves.setSelectedCalendarDate(null);
+      } else {
+        reserves.setIsSelectedDateAvailable(null);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.showAllReservesActive]);
