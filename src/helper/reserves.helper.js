@@ -6,10 +6,6 @@ export const getStatusesFromTab = (activeTab) => {
   } else if (activeTab === EReservesTabsNames.confirmed) {
     return [EReservationStatus.inProgress];
   } else if (activeTab === EReservesTabsNames.history) {
-    return [
-      EReservationStatus.done,
-      EReservationStatus.canceled,
-      EReservationStatus.wasted,
-    ];
+    return [EReservationStatus.done, EReservationStatus.wasted];
   } else return null;
 };

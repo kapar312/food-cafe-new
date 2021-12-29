@@ -1,19 +1,22 @@
 import axiosInstance from "../../api/api";
 import {toast} from "react-toastify";
-import {forEach} from "lodash";
 import {toJS} from "mobx";
 import {getStatusesFromTab} from "../../helper/reserves.helper";
-import {getNowTime} from "../../helper/time.helper";
 import {EReservesDateStatus} from "../../consts/reserves.const";
+import moment from "moment";
+import {
+  convertDateToDMYFormat,
+  getFirstDayInMonth,
+  getLastDayInMonth,
+} from "../../helper/time.helper";
 
 export class ReservesAction {
-  getReservesData(lastDigitsOfNumber) {
+  getReservesDataByPhone(lastDigitsOfNumber) {
     const params = {digits: lastDigitsOfNumber};
-    // this.setReservesList(reservesMockup);
     return axiosInstance
       .get("hostess/reservations/by-phone-number", {params})
       .then(({data}) => {
-        this.setReservesList(data);
+        this.setReservesListByPhone(data);
       })
       .catch((err) => {
         throw err;
@@ -24,15 +27,17 @@ export class ReservesAction {
     return axiosInstance
       .post(`hostess/reservations/${reservationId}/checkin`)
       .then(() => {
-        this.reservesList = this.reservesList.filter((item) => item.id !== reservationId);
+        this.reservesListByPhone = this.reservesListByPhone.filter(
+          (item) => item.id !== reservationId
+        );
       })
       .catch((err) => {
         throw err;
       });
   }
 
-  setReservesList(data) {
-    this.reservesList = data;
+  setReservesListByPhone(data) {
+    this.reservesListByPhone = data;
   }
 
   setLastDigitsOfNumber(data) {
@@ -46,8 +51,8 @@ export class ReservesAction {
   getReservesDataByDate(dateFrom, dateTo) {
     let url = new URLSearchParams();
     const statuses = getStatusesFromTab(this.activeReservesTab);
-    url.append("dateFrom", dateFrom ? dateFrom : getNowTime());
-    url.append("dateTo", dateTo ? dateTo : dateFrom || getNowTime());
+    url.append("dateFrom", dateFrom ? dateFrom : moment().format("DD.MM.yyyy"));
+    url.append("dateTo", dateTo ? dateTo : dateFrom || moment().format("DD.MM.yyyy"));
     statuses.forEach((item) => {
       url.append("statuses", item);
     });
@@ -69,10 +74,26 @@ export class ReservesAction {
     this.selectedCalendarDate = data;
   }
 
-  getDateList() {
+  setVisibleCalendarMonth(data) {
+    this.visibleCalendarMonth = data;
+  }
+
+  setVisibleCalendarYear(data) {
+    this.visibleCalendarYear = data;
+  }
+
+  getDatesList(dateFrom, dateTo) {
     const params = {
-      dateFrom: "25.12.2021",
-      dateTo: "31.12.2021",
+      dateFrom:
+        dateFrom ||
+        convertDateToDMYFormat(
+          getFirstDayInMonth(this.visibleCalendarMonth, this.visibleCalendarYear)
+        ),
+      dateTo:
+        dateTo ||
+        convertDateToDMYFormat(
+          getLastDayInMonth(this.visibleCalendarMonth, this.visibleCalendarYear)
+        ),
     };
     return axiosInstance
       .get("hostess/reservations-calendar/by-date-range", {params})
@@ -110,10 +131,6 @@ export class ReservesAction {
           return toJS(item);
         });
         this.setDatesList(newArray);
-        // this.datesList[objIndex].isAvailable = action === EReservesDateStatus.close;
-        // this.setDatesList(
-        //   (this.datesList[objIndex].isAvailable = action === EReservesDateStatus.close)
-        // );
       })
       .catch((err) => {
         toast.success(`Не удалось изменить статус на ${date}`);
@@ -123,5 +140,9 @@ export class ReservesAction {
 
   setShowAllReservesActive(data) {
     this.showAllReservesActive = data;
+  }
+
+  setSelectedDateStatus(data) {
+    this.selectedDateStatus = data;
   }
 }

@@ -78,13 +78,17 @@
             font-weight: bold;
             border: 1px solid $ghost;
           }
-          //&--weekend {
-          //  color: $textColorPrimary;
-          //}
           &--outside-month {
             color: $ghost !important;
           }
           &--keyboard-selected {
+            color: $textColorBlack;
+            background-color: transparent;
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+          &--selected {
             color: $textColorWhite;
             background-color: $secondaryColor;
             &:hover {

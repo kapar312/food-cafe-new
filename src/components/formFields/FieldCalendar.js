@@ -21,17 +21,22 @@ const FieldCalendar = inject("store")(
       defaultValue,
       customDatesArray,
       minDate,
+      maxDate,
       selected,
     }) => {
       const onFiledChange = (date) => {
-        const selectedDay = addZeroBefore(new Date(date).getDate());
-        const selectedMonth = addZeroBefore(new Date(date).getMonth() + 1);
-        const selectedYear = new Date(date).getFullYear();
-        const fullDate = `${selectedDay}.${selectedMonth}.${selectedYear}`;
-        reserves.setSelectedCalendarDate(fullDate);
         if (isFunction(onChange)) {
-          onChange(name, fullDate);
+          onChange(name, date);
         }
+        if (new Date(date).getMonth() !== reserves.visibleCalendarMonth) {
+          reserves.setVisibleCalendarMonth(new Date(date).getMonth());
+          reserves.setVisibleCalendarYear(new Date(date).getFullYear());
+        }
+      };
+
+      const onMonthChange = (date) => {
+        reserves.setVisibleCalendarMonth(new Date(date).getMonth());
+        reserves.setVisibleCalendarYear(new Date(date).getFullYear());
       };
 
       const createDate = (availableIndex, dayIndex, date) => {
@@ -88,10 +93,12 @@ const FieldCalendar = inject("store")(
               inline={true}
               locale={ru}
               onChange={(date) => onFiledChange(date)}
+              onMonthChange={(date) => onMonthChange(date)}
               calendarClassName={cn("form-field_field", fieldClassName)}
               showNavigation={false}
               renderDayContents={!!customDatesArray?.length && renderDays}
               minDate={minDate}
+              maxDate={maxDate}
             />
             {errorName && (
               <ErrorMessage name={errorName}>

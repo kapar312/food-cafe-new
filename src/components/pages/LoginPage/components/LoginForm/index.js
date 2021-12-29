@@ -17,7 +17,6 @@ const LoginForm = inject("store")(
     let history = useHistory();
 
     const onSubmitForm = (values) => {
-      console.log("values", values);
       auth.login(values).then(() => {
         history.push(MAIN_PAGE);
       });

@@ -1,6 +1,6 @@
 .reserves-page {
   &_wrapper {
-    padding: 15px;
+    padding: 10px 15px 15px;
   }
   &_inner-wrapper {
     display: flex;
@@ -22,21 +22,38 @@
       height: calc(100% - 50px);
       background-color: $ghost;
     }
+    .reserves-page_head__wrapper {
+      padding-top: 10px;
+      margin-bottom: 30px;
+    }
   }
   &_right-side {
     width: 100%;
     flex: 1 1 auto;
+    .reserves-page_head__wrapper {
+      margin-bottom: 10px;
+    }
   }
   &_head {
     &__wrapper {
-      margin-bottom: 30px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
     &__title {
       font-size: $lgFontSize;
-      line-height: $mdLineHeight;
+      line-height: $lgLineHeight;
       font-family: $primaryFontMedium;
+      position: relative;
+      align-items: center;
+      b {
+        position: absolute;
+        bottom: 70%;
+        left: 110%;
+        font-size: $bsFontSize;
+        line-height: $bsLineHeight;
+        color: $textColorSecondary;
+      }
     }
     &__date {
       font-size: $bsFontSize;
@@ -129,6 +146,7 @@
     &__wrapper {
       display: flex;
       align-items: center;
+      margin-top: 20px;
     }
     &__icon {
       display: flex;

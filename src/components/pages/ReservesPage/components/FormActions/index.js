@@ -1,16 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {inject, observer} from "mobx-react";
-import {toast} from "react-toastify";
 import cn from "classnames";
 
 import ButtonPrimary from "../../../../buttons/ButtonPrimary";
+
 import {EButtonColor} from "../../../../buttons/consts";
 
 const FormActions = inject("store")(
   observer(({store: {reserves}}) => {
     const showAllReserves = () => {
       if (reserves.activeReservesTab) {
-        toast.success(`все резервы на "${reserves.activeReservesTab}"`);
         reserves.setShowAllReservesActive(true);
       }
     };

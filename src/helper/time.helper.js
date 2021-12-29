@@ -27,9 +27,21 @@ export const getTokenExpires = (tokenExpires, changeResponse) => {
   return undefined;
 };
 
-export const getNowTime = () => {
-  const currentDay = addZeroBefore(new Date().getDate());
-  const currentMonth = addZeroBefore(new Date().getMonth() + 1);
-  const currentYear = new Date().getFullYear();
-  return `${currentDay}.${currentMonth}.${currentYear}`;
+export const convertDateToDMYFormat = (date) => {
+  // convert date format from new Date() to dd.mm.yyyy
+  if (date) {
+    const selectedDay = addZeroBefore(new Date(date).getDate());
+    const selectedMonth = addZeroBefore(new Date(date).getMonth() + 1);
+    const selectedYear = new Date(date).getFullYear();
+    return `${selectedDay}.${selectedMonth}.${selectedYear}`;
+  }
+  return null;
+};
+
+export const getFirstDayInMonth = (month, year) => {
+  return new Date(year, month, 1);
+};
+
+export const getLastDayInMonth = (month, year) => {
+  return new Date(year, month + 1, 0);
 };

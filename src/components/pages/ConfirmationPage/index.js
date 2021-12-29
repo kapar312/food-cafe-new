@@ -31,7 +31,7 @@ const ConfirmationPage = inject("store")(
     const onSubmitForm = (values) => {
       reserves.setLastDigitsOfNumber(values.digitsOfNumber);
       reserves
-        .getReservesData(reserves.lastDigitsOfNumber)
+        .getReservesDataByPhone(reserves.lastDigitsOfNumber)
         .then(() => {
           history.push(
             CONFIRMATION_RESERVES_PAGE + `?digits=${reserves.lastDigitsOfNumber}`

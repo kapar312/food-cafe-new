@@ -2,22 +2,28 @@ import {decorate, observable} from "mobx";
 import {ReservesAction} from "./reserves.action";
 
 class ReservesStore extends ReservesAction {
-  reservesList = {};
+  reservesListByPhone = {};
   reservesListByDate = {};
   lastDigitsOfNumber = "";
   activeReservesTab = null;
   selectedCalendarDate = null;
+  selectedDateStatus = null;
+  visibleCalendarMonth = null;
+  visibleCalendarYear = null;
   showAllReservesActive = false;
   datesList = [];
 }
 
 // eslint-disable-next-line no-class-assign
 ReservesStore = decorate(ReservesAction, {
-  reservesList: observable,
+  reservesListByPhone: observable,
   reservesListByDate: observable,
   lastDigitsOfNumber: observable,
   activeReservesTab: observable,
   selectedCalendarDate: observable,
+  selectedDateStatus: observable,
+  visibleCalendarMonth: observable,
+  visibleCalendarYear: observable,
   datesList: observable,
   showAllReservesActive: observable,
 });

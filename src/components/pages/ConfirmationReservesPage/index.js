@@ -44,7 +44,7 @@ const ConfirmationReservesPage = inject("store")(
         setFetching(true);
         reserves.setLastDigitsOfNumber(query.get("digits"));
         reserves
-          .getReservesData(query.get("digits"))
+          .getReservesDataByPhone(query.get("digits"))
           .catch((error) => {
             if (error) {
               if (error?.statusText?.length) {
@@ -76,7 +76,7 @@ const ConfirmationReservesPage = inject("store")(
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
         }
-        reserves.setReservesList(null);
+        reserves.setReservesListByPhone(null);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -115,11 +115,11 @@ const ConfirmationReservesPage = inject("store")(
     };
 
     const sortReservesList = (sortFn, isDesc) => {
-      let sorted = reserves.reservesList.slice().sort(sortFn);
+      let sorted = reserves.reservesListByPhone.slice().sort(sortFn);
       if (isDesc) {
         sorted.reverse();
       }
-      reserves.setReservesList(sorted);
+      reserves.setReservesListByPhone(sorted);
     };
 
     const renderRows = (data) => {
@@ -255,7 +255,7 @@ const ConfirmationReservesPage = inject("store")(
         return <Skeleton />;
       }
 
-      if (reserves.reservesList?.length <= 0) {
+      if (reserves.reservesListByPhone?.length <= 0) {
         return (
           <ConfirmationPlaceholder
             error={false}
@@ -264,8 +264,10 @@ const ConfirmationReservesPage = inject("store")(
         );
       }
 
-      if (reserves.reservesList?.length > 0) {
-        return <TableSort skeleton={prepareSkeleton()} data={reserves.reservesList} />;
+      if (reserves.reservesListByPhone?.length > 0) {
+        return (
+          <TableSort skeleton={prepareSkeleton()} data={reserves.reservesListByPhone} />
+        );
       }
 
       return (
@@ -276,11 +278,11 @@ const ConfirmationReservesPage = inject("store")(
         />
       );
     }, [
-      errorText,
       fetching,
+      reserves.reservesListByPhone,
       reserves.lastDigitsOfNumber,
+      errorText,
       prepareSkeleton,
-      reserves.reservesList,
     ]);
 
     const headerContent = (iconColor, iconClassName) => {

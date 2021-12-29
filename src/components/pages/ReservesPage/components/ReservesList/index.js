@@ -7,14 +7,15 @@ import {IconNotice, IconUser} from "../../../../Icons";
 import Skeleton from "../../../ConfirmationReservesPage/components/Skeleton";
 import TableSort from "../../../../common/TableSort";
 import ReservesPlaceholder from "../ReservesPlaceholder";
+import AlertPlaceholder from "../../../../common/AlertPlaceholder";
 
 import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
-import AlertPlaceholder from "../../../../common/AlertPlaceholder";
 import {
-  EReservationStatus,
-  EReservesTabsNames,
-} from "../../../../../consts/reserves.const";
-import {toJS} from "mobx";
+  convertDateToDMYFormat,
+  getFirstDayInMonth,
+  getLastDayInMonth,
+} from "../../../../../helper/time.helper";
+import {EReservesDateStatus} from "../../../../../consts/reserves.const";
 
 const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
@@ -24,10 +25,10 @@ const ReservesList = inject("store")(
     const isBigTablet = useMediaQuery({minWidth: 768, maxWidth: 991});
     const isSmallTablet = useMediaQuery({minWidth: 320, maxWidth: 767});
 
-    const getReservesData = (dateFrom) => {
+    const getReservesData = (dateFrom, dateTo) => {
       setFetching(true);
       reserves
-        .getReservesDataByDate(dateFrom)
+        .getReservesDataByDate(dateFrom, dateTo)
         .catch((error) => {
           if (error) {
             if (error?.statusText?.length) {
@@ -35,7 +36,7 @@ const ReservesList = inject("store")(
             } else if (error.data?.errors?.length) {
               setErrorText(error.data?.errors[0]);
             } else {
-              setErrorText("Нет резарва на данный номер");
+              setErrorText("Нет резарвов");
             }
           } else toast.error("Непредвиденная ошибка. Поробуйте перезагрузить страницу.");
         })
@@ -44,17 +45,66 @@ const ReservesList = inject("store")(
         });
     };
 
+    const getAllReservesOnMonth = () => {
+      getReservesData(
+        convertDateToDMYFormat(
+          getFirstDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
+        ),
+        convertDateToDMYFormat(
+          getLastDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
+        )
+      );
+      reserves.setSelectedCalendarDate(null);
+    };
+
     useEffect(() => {
-      getReservesData(reserves.selectedCalendarDate);
+      if (reserves.selectedCalendarDate) {
+        getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
+        const dateInCalendar = reserves.datesList?.find(
+          (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
+        );
+        if (dateInCalendar) {
+          reserves.setSelectedDateStatus(
+            dateInCalendar?.isAvailable
+              ? EReservesDateStatus.open
+              : EReservesDateStatus.close
+          );
+        }
+      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reserves.selectedCalendarDate, reserves.activeReservesTab]);
+    }, [reserves.selectedCalendarDate]);
+
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.visibleCalendarMonth]);
+
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+      } else if (reserves.selectedCalendarDate) {
+        getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.activeReservesTab]);
+
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+        reserves.setSelectedCalendarDate(null);
+        reserves.setSelectedDateStatus(null);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.showAllReservesActive]);
 
     const sortReservesList = (sortFn, isDesc) => {
       let sorted = reserves.reservesListByDate.slice().sort(sortFn);
       if (isDesc) {
         sorted.reverse();
       }
-      reserves.setReservesList(sorted);
+      reserves.setReservesListByDate(sorted);
     };
 
     const renderRows = (data) => {
@@ -69,8 +119,8 @@ const ReservesList = inject("store")(
             </div>
           ),
           reservationType: () => item.reservationType,
-          amount: () => formatPrice(item.price),
-          guests: () => item.peopleCount,
+          price: () => formatPrice(item.price),
+          peopleCount: () => item.peopleCount,
         };
       });
     };
@@ -82,10 +132,18 @@ const ReservesList = inject("store")(
           title: "Резерв",
           sorting: (isDesc) => {
             sortReservesList((a, b) => {
-              if (a.fullName < b.fullName) {
-                return -1;
+              if (reserves.showAllReservesActive) {
+                if (a.reservationDate < b.reservationDate) {
+                  return -1;
+                } else {
+                  return 1;
+                }
               } else {
-                return 1;
+                if (a.fullName < b.fullName) {
+                  return -1;
+                } else {
+                  return 1;
+                }
               }
             }, isDesc);
           },
@@ -104,7 +162,7 @@ const ReservesList = inject("store")(
           },
         },
         {
-          id: "amount",
+          id: "price",
           title: isSmallTablet ? (
             <IconNotice color="#9399A8" />
           ) : isBigTablet ? (
@@ -123,7 +181,7 @@ const ReservesList = inject("store")(
           },
         },
         {
-          id: "guests",
+          id: "peopleCount",
           title: isSmallTablet ? <IconUser color="#9399A8" /> : "Гости",
           sorting: (isDesc) => {
             sortReservesList((a, b) => {
@@ -146,16 +204,17 @@ const ReservesList = inject("store")(
 
     const content = useMemo(() => {
       const dateInCalendar = reserves.datesList?.find(
-        (item) => item.date === reserves.selectedCalendarDate
+        (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
       );
-
-      console.log("dateInCalendar", toJS(dateInCalendar));
 
       if (fetching) {
         return <Skeleton />;
       }
 
-      if (dateInCalendar?.isAvailable === false) {
+      if (
+        dateInCalendar?.isAvailable === false ||
+        reserves.selectedDateStatus === EReservesDateStatus.close
+      ) {
         return (
           <AlertPlaceholder
             text="Вы закрыли прием гостей на выбранную дату"
@@ -175,12 +234,12 @@ const ReservesList = inject("store")(
       }
 
       return <ReservesPlaceholder />;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-      fetching,
       reserves.reservesListByDate,
-      reserves.selectedCalendarDate,
-      reserves.datesList,
+      fetching,
       prepareSkeleton,
+      reserves.selectedDateStatus,
     ]);
 
     return <div className="reserves-page_list__wrapper">{content}</div>;
