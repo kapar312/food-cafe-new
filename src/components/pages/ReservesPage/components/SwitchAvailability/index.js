@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo} from "react";
 import {inject, observer} from "mobx-react";
 
 import FieldSwitch from "../../../../formFields/FieldSwitch";
@@ -11,15 +11,17 @@ import {convertDateToDMYFormat} from "../../../../../helper/time.helper";
 
 const SwitchAvailability = inject("store")(
   observer(({store: {reserves}, openModal}) => {
-    const [switchValue, setSwitchValue] = useState(false);
-
     const changeSwitchValue = () => {
       const dateInCalendar = reserves.datesList?.find(
         (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
       );
       if (dateInCalendar?.isAvailable !== undefined) {
-        setSwitchValue(!dateInCalendar?.isAvailable);
-      } else setSwitchValue(false);
+        reserves.setSelectedDateStatus(
+          dateInCalendar?.isAvailable
+            ? EReservesDateStatus.open
+            : EReservesDateStatus.close
+        );
+      } else reserves.setSelectedDateStatus(reserves.selectedDateStatus);
     };
 
     const onSwitchClick = (name, nextChecked) => {
@@ -30,9 +32,11 @@ const SwitchAvailability = inject("store")(
           if (dateList[i].isAvailable && dateList[i].reservesCount > 0) {
             openModal();
           } else {
-            setSwitchValue(nextChecked);
             reserves.handleReservationDate(
               convertDateToDMYFormat(reserves.selectedCalendarDate),
+              nextChecked ? EReservesDateStatus.close : EReservesDateStatus.open
+            );
+            reserves.setSelectedDateStatus(
               nextChecked ? EReservesDateStatus.close : EReservesDateStatus.open
             );
           }
@@ -44,12 +48,17 @@ const SwitchAvailability = inject("store")(
     useEffect(() => {
       changeSwitchValue();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reserves.selectedCalendarDate]);
+    }, [reserves.datesList]);
+
+    useEffect(() => {
+      console.log("reserves.selectedDateStatus", reserves.selectedDateStatus);
+    }, [reserves.selectedDateStatus]);
 
     return useMemo(() => {
       if (
         reserves.activeReservesTab === EReservesTabsNames.confirmed ||
-        reserves.activeReservesTab === EReservesTabsNames.history
+        reserves.activeReservesTab === EReservesTabsNames.history ||
+        !reserves.selectedCalendarDate
       ) {
         return <></>;
       }
@@ -58,14 +67,18 @@ const SwitchAvailability = inject("store")(
           <FieldSwitch
             name="isAvailable"
             onChange={(name, value) => onSwitchClick(name, value)}
-            value={switchValue}
+            value={reserves.selectedDateStatus === EReservesDateStatus.close}
             isDisabled={!reserves.selectedCalendarDate}
           />
           Не принимать гостей
         </div>
       );
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reserves.activeReservesTab, reserves.selectedCalendarDate, switchValue]);
+    }, [
+      reserves.activeReservesTab,
+      reserves.selectedCalendarDate,
+      reserves.selectedDateStatus,
+    ]);
   })
 );
 

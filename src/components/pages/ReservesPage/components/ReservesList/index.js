@@ -7,14 +7,15 @@ import {IconNotice, IconUser} from "../../../../Icons";
 import Skeleton from "../../../ConfirmationReservesPage/components/Skeleton";
 import TableSort from "../../../../common/TableSort";
 import ReservesPlaceholder from "../ReservesPlaceholder";
+import AlertPlaceholder from "../../../../common/AlertPlaceholder";
 
 import {formatPrice} from "../../../ConfirmationReservesPage/helpers";
-import AlertPlaceholder from "../../../../common/AlertPlaceholder";
 import {
   convertDateToDMYFormat,
   getFirstDayInMonth,
   getLastDayInMonth,
 } from "../../../../../helper/time.helper";
+import {EReservesDateStatus} from "../../../../../consts/reserves.const";
 
 const ReservesList = inject("store")(
   observer(({store: {reserves}}) => {
@@ -62,7 +63,13 @@ const ReservesList = inject("store")(
         const dateInCalendar = reserves.datesList?.find(
           (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
         );
-        reserves.setIsSelectedDateAvailable(dateInCalendar?.isAvailable);
+        if (dateInCalendar) {
+          reserves.setSelectedDateStatus(
+            dateInCalendar?.isAvailable
+              ? EReservesDateStatus.open
+              : EReservesDateStatus.close
+          );
+        }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.selectedCalendarDate]);
@@ -82,6 +89,15 @@ const ReservesList = inject("store")(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reserves.activeReservesTab]);
+
+    useEffect(() => {
+      if (reserves.showAllReservesActive) {
+        getAllReservesOnMonth();
+        reserves.setSelectedCalendarDate(null);
+        reserves.setSelectedDateStatus(null);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [reserves.showAllReservesActive]);
 
     const sortReservesList = (sortFn, isDesc) => {
       let sorted = reserves.reservesListByDate.slice().sort(sortFn);
@@ -197,7 +213,7 @@ const ReservesList = inject("store")(
 
       if (
         dateInCalendar?.isAvailable === false ||
-        reserves.isSelectedDateAvailable === false
+        reserves.selectedDateStatus === EReservesDateStatus.close
       ) {
         return (
           <AlertPlaceholder
@@ -223,7 +239,7 @@ const ReservesList = inject("store")(
       reserves.reservesListByDate,
       fetching,
       prepareSkeleton,
-      reserves.isSelectedDateAvailable,
+      reserves.selectedDateStatus,
     ]);
 
     return <div className="reserves-page_list__wrapper">{content}</div>;

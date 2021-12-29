@@ -5,9 +5,9 @@ import FieldCalendar from "../../../../formFields/FieldCalendar";
 import ModalNotAvailableReserve from "../../../../modals/ModalNotAvailableReserve";
 import CalendarInfo from "../CalendarInfo";
 import FormActions from "../FormActions";
+import SwitchAvailability from "../SwitchAvailability";
 
 import {EReservesTabsNames} from "../../../../../consts/reserves.const";
-import SwitchAvailability from "../SwitchAvailability";
 import {
   convertDateToDMYFormat,
   getFirstDayInMonth,

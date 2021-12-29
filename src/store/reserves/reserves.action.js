@@ -142,7 +142,7 @@ export class ReservesAction {
     this.showAllReservesActive = data;
   }
 
-  setIsSelectedDateAvailable(data) {
-    this.isSelectedDateAvailable = data;
+  setSelectedDateStatus(data) {
+    this.selectedDateStatus = data;
   }
 }

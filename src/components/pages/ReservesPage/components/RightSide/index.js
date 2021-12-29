@@ -1,8 +1,8 @@
 import React from "react";
+import {inject, observer} from "mobx-react";
 
 import ReservesList from "../ReservesList";
 import TabsGroup from "../TabsGroup";
-import {inject, observer} from "mobx-react";
 
 const RightSide = inject("store")(
   observer(({store: {reserves}}) => {

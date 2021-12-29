@@ -1,35 +1,18 @@
 import React, {useEffect} from "react";
+import {inject, observer} from "mobx-react";
+import {NavLink} from "react-router-dom";
 
 import Layout from "../../segments/Layout";
-
+import IconArrow from "../../Icons/common/IconArrow";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
-import {NavLink} from "react-router-dom";
+
 import {MAIN_PAGE} from "../../../consts/routes.const";
-import IconArrow from "../../Icons/common/IconArrow";
 import {COLOR_WHITE} from "../../../consts/colors.const";
-import {inject, observer} from "mobx-react";
-import {
-  convertDateToDMYFormat,
-  getFirstDayInMonth,
-  getLastDayInMonth,
-} from "../../../helper/time.helper";
 import {EReservesTabsNames} from "../../../consts/reserves.const";
 
 const ReservesPage = inject("store")(
   observer(({store: {reserves}}) => {
-    const getAllReservesOnMonth = () => {
-      reserves.getReservesDataByDate(
-        convertDateToDMYFormat(
-          getFirstDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
-        ),
-        convertDateToDMYFormat(
-          getLastDayInMonth(reserves.visibleCalendarMonth, reserves.visibleCalendarYear)
-        )
-      );
-      reserves.setSelectedCalendarDate(null);
-    };
-
     useEffect(() => {
       reserves.setSelectedCalendarDate(new Date());
       reserves.setVisibleCalendarMonth(new Date().getMonth());
