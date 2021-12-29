@@ -44,7 +44,7 @@ const ConfirmationReservesPage = inject("store")(
         setFetching(true);
         reserves.setLastDigitsOfNumber(query.get("digits"));
         reserves
-          .getReservesData(query.get("digits"))
+          .getReservesDataByPhone(query.get("digits"))
           .catch((error) => {
             if (error) {
               if (error?.statusText?.length) {

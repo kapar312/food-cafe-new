@@ -37,3 +37,11 @@ export const convertDateToDMYFormat = (date) => {
   }
   return null;
 };
+
+export const getFirstDayInMonth = (month, year) => {
+  return new Date(year, month, 1);
+};
+
+export const getLastDayInMonth = (month, year) => {
+  return new Date(year, month + 1, 0);
+};

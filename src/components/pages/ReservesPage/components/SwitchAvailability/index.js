@@ -23,6 +23,7 @@ const SwitchAvailability = inject("store")(
     };
 
     const onSwitchClick = (name, nextChecked) => {
+      console.log("123");
       const dateList = reserves.datesList;
       for (let i = 0; i < dateList?.length; i++) {
         if (dateList[i].date === convertDateToDMYFormat(reserves.selectedCalendarDate)) {
@@ -48,8 +49,7 @@ const SwitchAvailability = inject("store")(
     return useMemo(() => {
       if (
         reserves.activeReservesTab === EReservesTabsNames.confirmed ||
-        reserves.activeReservesTab === EReservesTabsNames.history ||
-        !reserves.selectedCalendarDate
+        reserves.activeReservesTab === EReservesTabsNames.history
       ) {
         return <></>;
       }

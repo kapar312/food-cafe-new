@@ -4,9 +4,14 @@ import {toJS} from "mobx";
 import {getStatusesFromTab} from "../../helper/reserves.helper";
 import {EReservesDateStatus} from "../../consts/reserves.const";
 import moment from "moment";
+import {
+  convertDateToDMYFormat,
+  getFirstDayInMonth,
+  getLastDayInMonth,
+} from "../../helper/time.helper";
 
 export class ReservesAction {
-  getReservesData(lastDigitsOfNumber) {
+  getReservesDataByPhone(lastDigitsOfNumber) {
     const params = {digits: lastDigitsOfNumber};
     return axiosInstance
       .get("hostess/reservations/by-phone-number", {params})
@@ -67,18 +72,26 @@ export class ReservesAction {
     this.selectedCalendarDate = data;
   }
 
-  setSelectedCalendarMonth(data) {
-    this.selectedCalendarMonth = data;
+  setVisibleCalendarMonth(data) {
+    this.visibleCalendarMonth = data;
   }
 
-  setSelectedCalendarYear(data) {
-    this.selectedCalendarYear = data;
+  setVisibleCalendarYear(data) {
+    this.visibleCalendarYear = data;
   }
 
-  getDatesList() {
+  getDatesList(dateFrom, dateTo) {
     const params = {
-      dateFrom: "25.12.2021",
-      dateTo: "02.01.2022",
+      dateFrom:
+        dateFrom ||
+        convertDateToDMYFormat(
+          getFirstDayInMonth(this.visibleCalendarMonth, this.visibleCalendarYear)
+        ),
+      dateTo:
+        dateTo ||
+        convertDateToDMYFormat(
+          getLastDayInMonth(this.visibleCalendarMonth, this.visibleCalendarYear)
+        ),
     };
     return axiosInstance
       .get("hostess/reservations-calendar/by-date-range", {params})
@@ -125,5 +138,9 @@ export class ReservesAction {
 
   setShowAllReservesActive(data) {
     this.showAllReservesActive = data;
+  }
+
+  setIsSelectedDateAvailable(data) {
+    this.isSelectedDateAvailable = data;
   }
 }

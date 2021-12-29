@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import cn from "classnames";
 import {ErrorMessage} from "formik";
 import DatePicker from "react-datepicker";
@@ -25,10 +25,20 @@ const FieldCalendar = inject("store")(
       selected,
     }) => {
       const onFiledChange = (date) => {
-        reserves.setSelectedCalendarDate(date);
+        console.log("onFiledChange", 321);
         if (isFunction(onChange)) {
           onChange(name, date);
         }
+        if (new Date(date).getMonth() !== reserves.visibleCalendarMonth) {
+          reserves.setVisibleCalendarMonth(new Date(date).getMonth());
+          reserves.setVisibleCalendarYear(new Date(date).getFullYear());
+        }
+      };
+
+      const onMonthChange = (date) => {
+        console.log("onMonthChange", 123);
+        reserves.setVisibleCalendarMonth(new Date(date).getMonth());
+        reserves.setVisibleCalendarYear(new Date(date).getFullYear());
       };
 
       const createDate = (availableIndex, dayIndex, date) => {
@@ -74,11 +84,6 @@ const FieldCalendar = inject("store")(
           }
         }
         return createDate(arrayIsAvailableIndex, arrayDayIndex, customDate);
-      };
-
-      const onMonthChange = (date) => {
-        reserves.setSelectedCalendarMonth(addZeroBefore(new Date(date).getMonth() + 1));
-        reserves.setSelectedCalendarYear(addZeroBefore(new Date(date).getFullYear()));
       };
 
       return (

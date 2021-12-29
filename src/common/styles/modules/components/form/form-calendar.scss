@@ -82,7 +82,11 @@
             color: $ghost !important;
           }
           &--keyboard-selected {
+            color: $textColorBlack;
             background-color: transparent;
+            &:hover {
+              background-color: #f0f0f0;
+            }
           }
           &--selected {
             color: $textColorWhite;

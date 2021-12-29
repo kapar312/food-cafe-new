@@ -22,7 +22,6 @@ const ReservesList = inject("store")(
 
     const getReservesData = (dateFrom) => {
       setFetching(true);
-      console.log("dateFrom", dateFrom);
       reserves
         .getReservesDataByDate(dateFrom)
         .catch((error) => {
@@ -32,7 +31,7 @@ const ReservesList = inject("store")(
             } else if (error.data?.errors?.length) {
               setErrorText(error.data?.errors[0]);
             } else {
-              setErrorText("Нет резарва на данный номер");
+              setErrorText("Нет резарвов");
             }
           } else toast.error("Непредвиденная ошибка. Поробуйте перезагрузить страницу.");
         })
@@ -42,9 +41,15 @@ const ReservesList = inject("store")(
     };
 
     useEffect(() => {
-      getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
+      if (reserves.selectedCalendarDate) {
+        getReservesData(convertDateToDMYFormat(reserves.selectedCalendarDate));
+        const dateInCalendar = reserves.datesList?.find(
+          (item) => item.date === convertDateToDMYFormat(reserves.selectedCalendarDate)
+        );
+        reserves.setIsSelectedDateAvailable(dateInCalendar?.isAvailable);
+      }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [reserves.selectedCalendarDate, reserves.activeReservesTab]);
+    }, [reserves.selectedCalendarDate]);
 
     const sortReservesList = (sortFn, isDesc) => {
       let sorted = reserves.reservesListByDate.slice().sort(sortFn);
@@ -150,7 +155,10 @@ const ReservesList = inject("store")(
         return <Skeleton />;
       }
 
-      if (dateInCalendar?.isAvailable === false) {
+      if (
+        dateInCalendar?.isAvailable === false ||
+        reserves.isSelectedDateAvailable === false
+      ) {
         return (
           <AlertPlaceholder
             text="Вы закрыли прием гостей на выбранную дату"
@@ -170,12 +178,12 @@ const ReservesList = inject("store")(
       }
 
       return <ReservesPlaceholder />;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-      fetching,
       reserves.reservesListByDate,
-      reserves.selectedCalendarDate,
-      reserves.datesList,
+      fetching,
       prepareSkeleton,
+      reserves.isSelectedDateAvailable,
     ]);
 
     return <div className="reserves-page_list__wrapper">{content}</div>;
