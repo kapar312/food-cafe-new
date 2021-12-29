@@ -1,0 +1,21 @@
+// Presets
+@import "base/normalize";
+@import "base/fonts";
+@import "base/variables";
+@import "base/variables-media";
+@import "base/mixins";
+
+// Global
+@import "modules/global-styles";
+
+// Components
+@import "modules/components/z-main-of-components";
+
+// Segments
+@import "modules/segments/z-main-of-segments";
+
+// Pages
+@import "modules/pages/z-main-of-pages";
+
+// Media
+@import "modules/global-styles-media";

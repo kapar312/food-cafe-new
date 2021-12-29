@@ -1,0 +1,39 @@
+.error-page {
+  &_wrapper {
+    display: flex;
+    min-height: 100%;
+  }
+  &_inner-wrapper {
+    display: flex;
+    width: 100%;
+  }
+  &_image__wrapper {
+    width: 50%;
+    background-image: url("../../../../images/jpg/error-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  &_content {
+    &__wrapper {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    &__title {
+      margin: 20px 0;
+      font-size: $xlFontSize + $xlFontSize;
+      line-height: $xlLineHeight + $xlLineHeight;
+      color: $primaryColor;
+    }
+    &__sub-title {
+      margin-bottom: 5px;
+      font-size: $xlFontSize + $xlFontSize;
+      line-height: $xlLineHeight + $xlLineHeight;
+    }
+    &__text {
+      margin-bottom: 30px;
+    }
+  }
+}

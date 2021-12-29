@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: $primaryFontRegular;
+  letter-spacing: $bsLetterSpacing;
+  min-height: 100vh;
+  display: flex;
+  min-width: 320px;
+  &.disable-scroll {
+    overflow: hidden;
+  }
+}
+
+div#root {
+  width: 100%;
+  display: flex;
+}
+
+div.App {
+  width: 100%;
+}
+
+a {
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1170px;
+  &.container-full {
+  }
+}
+
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.ant-scrolling-effect {
+  .main-layout_inner-wrapper {
+    filter: blur(5px);
+  }
+}

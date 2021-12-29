@@ -1,0 +1,17 @@
+@media (min-width: $xl-media) and (max-width: $xxl-media) {
+}
+
+@media (min-width: $lg-media) and (max-width: $xl-media-z) {
+}
+
+@media (min-width: $md-media) and (max-width: $lg-media-z) {
+}
+
+@media (min-width: $sm-media) and (max-width: $md-media-z) {
+}
+
+@media (min-width: $xs-media) and (max-width: $sm-media-z) {
+  .container {
+    max-width: 100%;
+  }
+}

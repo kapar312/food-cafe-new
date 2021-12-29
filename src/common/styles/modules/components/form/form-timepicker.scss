@@ -1,0 +1,77 @@
+.form-field_wrapper._timepicker {
+  .form-field_field {
+    width: $timepickerFieldWidth;
+    .rc-time-picker {
+      &-input {
+        height: auto;
+        padding: 7px 12px;
+        background-color: $white;
+        border-radius: $mdBorderRadius;
+        border: $borderPrimary;
+        font-size: $bsFontSize;
+        &:focus-visible {
+          outline: none;
+          border-color: $primaryColor;
+        }
+        &:hover {
+          border-color: $primaryColorLighten;
+        }
+      }
+      &-clear {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 30px;
+        height: auto;
+        border-radius: 0 $mdBorderRadius $mdBorderRadius 0;
+        &:hover {
+          background-color: $light-gray;
+        }
+        &-icon {
+          &:after {
+            font-size: $mdFontSize;
+            height: auto;
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+.form-field_timepicker__dropdown.rc-time-picker-panel {
+  width: $timepickerFieldWidth;
+  max-width: 100%;
+  background-color: $white;
+  border-radius: $mdBorderRadius;
+  border: none;
+  .rc-time-picker-panel {
+    &-inner {
+      width: 100%;
+      border-radius: $mdBorderRadius;
+      border: $borderPrimary;
+    }
+    &-input-wrap {
+      padding: 7px 12px;
+      font-size: $bsFontSize;
+    }
+    &-combobox {
+      display: flex;
+    }
+    &-select {
+      width: 50%;
+      max-height: 210px;
+      li {
+        font-size: $bsFontSize;
+        height: 28px;
+        line-height: 28px;
+        &.rc-time-picker-panel-select-option-selected {
+          background-color: $light-gray;
+        }
+      }
+    }
+  }
+}

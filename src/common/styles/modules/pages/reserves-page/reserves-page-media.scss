@@ -1,0 +1,11 @@
+@media (min-width: $xs-media) and (max-width: $sm-media-z) {
+  .reserves-page {
+    &_inner-wrapper {
+      flex-direction: column;
+    }
+    &_left-side {
+      width: 100%;
+      margin-bottom: 100px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.form-field_wrapper._input {
+  .form-field_field {
+    padding: 10px 12px;
+    background-color: $white;
+    border-radius: $mdBorderRadius;
+    border: $borderPrimary;
+    transition: 0.2s;
+    width: $inputFieldWidth;
+    &:focus-visible {
+      outline: none;
+      border-color: $primaryColor;
+    }
+    &:hover {
+      border-color: $primaryColorLighten;
+    }
+  }
+  &._label {
+    .form-field_inner-wrapper {
+      padding-top: 12px;
+    }
+  }
+}

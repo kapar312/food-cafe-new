@@ -1,0 +1,118 @@
+// Colors
+
+$white: #ffffff;
+$black: #000000;
+$gray: #898989;
+$light-gray: #dbdbdb;
+$ghost: #c9ccd3;
+$titan-white: #f9f9ff;
+$alabaster: #fafafa;
+$kimberly: #7374a3;
+$seashell: #f1f1f1;
+
+$white-lilac: #e3e4f5;
+
+// Project Colors
+$primaryColor: #4b556f;
+$primaryColorHover: #3e4861;
+$primaryColorLighten: #9399a8;
+
+$secondaryColor: #fd8e3e;
+$secondaryColorHover: #f6a361;
+$secondaryColorLighten: #e2ad88;
+
+$successColor: #8bc531;
+$successColorHover: #8bc581;
+$successColorLighten: #96d336;
+
+$dangerColor: #ea5f60;
+$dangerColorHover: #ff7261;
+$dangerColorLighten: #ff7261;
+
+$defaultColor: $white;
+$defaultColorHover: $white-lilac;
+$defaultColorLighten: $titan-white;
+
+$disabledColor: #e6e6e6;
+
+// Blocks and style elements colors
+$mainBackgroundColor: #f9f6f6;
+$headerBgColor: $white;
+$mobileHeaderBgColor: $primaryColor;
+$sidebarBgColor: $white;
+$selectDropdownBgColor: $alabaster;
+$cardItemBackground: $white;
+
+$bsBorderColor: $light-gray;
+$scrollbarColor: $kimberly;
+$scrollbarTrackColor: $seashell;
+$listHeadColor: $seashell;
+
+// Text colors
+$textColorBlack: $black;
+$textColorWhite: $white;
+$textColorGrey: $gray;
+$textColorPrimary: $primaryColor;
+$textColorPrimaryHover: $primaryColorHover;
+$textColorPrimaryLighten: $primaryColorLighten;
+$textColorSecondary: $secondaryColor;
+$textColorLightSecondary: $secondaryColorHover;
+$textColorDanger: $dangerColor;
+$textColorLightDanger: $dangerColorHover;
+
+// Border-radius
+$smBorderRadius: 4px;
+$mdBorderRadius: 8px;
+$bsBorderRadius: 12px;
+$circleBorderRadius: 50%;
+$roundBorderRadius: 55px;
+
+// Box-shadow
+$bsBoxShadow: 0px 2px 17px rgba(120, 120, 120, 0.1);
+$bsBoxShadowHover: 0px 2px 10px rgba(69, 71, 99, 0.25);
+
+// Z-indexes
+$zIndexHeader: 1100;
+$zIndexSidebar: 11;
+$zIndexCustomSelect: 13;
+$zIndexModal: 1105;
+
+// Fonts
+$primaryFontBold: "Roboto-Bold";
+$primaryFontMedium: "Roboto-Medium";
+$primaryFontRegular: "Roboto-Regular";
+$primaryFontLight: "Roboto-Light";
+
+// Font-size
+$xsFontSize: 0.75rem;
+$smFontSize: 0.875rem;
+$bsFontSize: 1rem;
+$mdFontSize: 1.125rem;
+$lgFontSize: 1.25rem;
+$xlFontSize: 1.75rem;
+
+// Line-height
+$xsLineHeight: calc(0.75rem + 2px);
+$smLineHeight: calc(0.875rem + 2px);
+$bsLineHeight: calc(1rem + 2px);
+$mdLineHeight: calc(1.125rem + 2px);
+$lgLineHeight: calc(1.25rem + 2px);
+$xlLineHeight: calc(1.75rem + 2px);
+
+$removeLineHeight: 0;
+$staticLineHeight: 1;
+
+// Letter-spacing
+$bsLetterSpacing: 0.02em;
+
+// Code variables
+$borderPrimary: 1px solid $bsBorderColor;
+
+// blocks initial size value
+$labelFieldWidth: 160px;
+$inputFieldWidth: 320px;
+$textareaFieldWidth: 500px;
+$dropzoneFieldWidth: 100%;
+$selectFieldWidth: 320px;
+$coordinatesFieldWidth: 400px;
+$timepickerFieldWidth: 160px;

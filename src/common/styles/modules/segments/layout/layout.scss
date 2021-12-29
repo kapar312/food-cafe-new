@@ -1,0 +1,11 @@
+.layout {
+  &_wrapper {
+    background-color: $mainBackgroundColor;
+    min-height: 100vh;
+    position: relative;
+  }
+  &_inner-wrapper {
+    padding: 15px;
+    transition: 0.2s;
+  }
+}

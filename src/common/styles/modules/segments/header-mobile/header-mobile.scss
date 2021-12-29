@@ -1,0 +1,27 @@
+.header-mobile {
+  &_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 8px 25px;
+    background-color: $mobileHeaderBgColor;
+    color: $textColorWhite;
+    box-shadow: $bsBoxShadow;
+    z-index: $zIndexHeader;
+    &.main-page {
+      .header-mobile_inner-wrapper {
+        justify-content: center;
+      }
+    }
+  }
+  &_inner-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+}

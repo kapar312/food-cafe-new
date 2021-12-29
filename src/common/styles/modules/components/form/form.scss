@@ -1,0 +1,35 @@
+.form-field {
+  &_wrapper {
+    margin-bottom: 20px;
+    display: flex;
+  }
+  &_label {
+    margin-right: 25px;
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+  }
+  &_inner-wrapper {
+    position: relative;
+    width: 100%;
+    flex: 1 1 auto;
+    transition: 0.2s;
+  }
+  &_sub-placeholder {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(24px);
+    transition: 0.2s;
+    color: $gray;
+    cursor: text;
+    transform-origin: 0 0;
+    &._activeField {
+      transform: translateY(0) scale(0.8);
+      color: $primaryColorLighten;
+    }
+  }
+  &_error {
+    color: $dangerColor;
+    margin: 0;
+  }
+}

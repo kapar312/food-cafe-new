@@ -1,0 +1,56 @@
+.confirmation-page {
+  &_wrapper {
+    display: flex;
+    width: 100%;
+    padding: 15px;
+  }
+  &_logo {
+    display: block;
+    margin-bottom: 10px;
+  }
+  &_description {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  &_form {
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      padding: 100px 50px;
+      box-shadow: 0 2px 17px rgba(120, 120, 120, 0.1);
+      border-radius: $bsBorderRadius;
+      width: 100%;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      height: inherit;
+      align-items: center;
+      .btn-custom {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        width: 100%;
+        max-width: 380px;
+      }
+    }
+    &__title {
+      h2 {
+        font-weight: 500;
+        font-size: $lgFontSize;
+        margin-bottom: 20px;
+        margin-top: 0;
+      }
+      p {
+        font-size: $bsFontSize;
+        line-height: 1.4;
+        color: $textColorPrimary;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.form-field_wrapper._switch {
+  .form-field {
+    &_inner-wrapper {
+      display: flex;
+      align-items: center;
+    }
+    &_field {
+      .react-switch {
+        &-bg {
+          //background-color: $ghost !important;
+        }
+        &-handle {
+          top: 2px;
+        }
+      }
+    }
+  }
+}
